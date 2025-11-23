@@ -71,7 +71,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
 
     return (
         <section
-            className="relative h-screen w-full overflow-hidden text-white"
+            className="relative h-[100dvh] w-full overflow-hidden text-white"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
