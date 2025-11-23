@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useMotionTemplate } from "framer-motion";
 import { X, Mail, Phone, Instagram, MapPin, ArrowRight } from "lucide-react";
 import { useUI } from "@/context/UIContext";
 import { useEffect, useRef, useState } from "react";
@@ -9,6 +9,7 @@ import { siteConfig } from "@/lib/config";
 export default function BusinessCard() {
     const { isContactOpen, closeContact } = useUI();
     const cardRef = useRef<HTMLDivElement>(null);
+    const rectRef = useRef<DOMRect | null>(null);
     const [isFlipped, setIsFlipped] = useState(false);
 
     // 3D Tilt Logic
@@ -26,9 +27,33 @@ export default function BusinessCard() {
     const sheenX = useTransform(mouseX, [-0.5, 0.5], ["0%", "200%"]);
     const sheenY = useTransform(mouseY, [-0.5, 0.5], ["0%", "200%"]);
 
+    // Update rect on mount and resize
+    useEffect(() => {
+        const updateRect = () => {
+            if (cardRef.current) {
+                rectRef.current = cardRef.current.getBoundingClientRect();
+            }
+        };
+
+        if (isContactOpen) {
+            // Small delay to ensure animation has settled or element is rendered
+            const timer = setTimeout(updateRect, 100);
+            window.addEventListener("resize", updateRect);
+            window.addEventListener("scroll", updateRect);
+
+            return () => {
+                clearTimeout(timer);
+                window.removeEventListener("resize", updateRect);
+                window.removeEventListener("scroll", updateRect);
+            };
+        }
+    }, [isContactOpen]);
+
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!cardRef.current) return;
-        const rect = cardRef.current.getBoundingClientRect();
+        // Fallback if rect is missing, but try to use cached
+        const rect = rectRef.current || cardRef.current?.getBoundingClientRect();
+        if (!rect) return;
+
         const width = rect.width;
         const height = rect.height;
         const mouseXFromCenter = e.clientX - rect.left - width / 2;
@@ -107,7 +132,7 @@ export default function BusinessCard() {
                                 rotateY,
                                 transformStyle: "preserve-3d",
                             }}
-                            className="relative w-full max-w-[90vw] md:max-w-[550px] aspect-[1.7/1] cursor-pointer group"
+                            className="relative w-full max-w-[90vw] md:max-w-[550px] aspect-[1.7/1] cursor-pointer group will-change-transform"
                             onClick={handleFlip}
                         >
                             {/* Floating Particles (Sparkles) */}
@@ -115,7 +140,7 @@ export default function BusinessCard() {
 
                             {/* The Card Itself - Double Sided */}
                             <motion.div
-                                className="relative w-full h-full transform-style-3d transition-all duration-700"
+                                className="relative w-full h-full transform-style-3d transition-all duration-700 will-change-transform"
                                 animate={{ rotateY: isFlipped ? 180 : 0 }}
                                 transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
                             >
@@ -203,6 +228,8 @@ export default function BusinessCard() {
 // Helper Components
 
 function CardEffects({ sheenX, sheenY }: { sheenX: any, sheenY: any }) {
+    const background = useMotionTemplate`radial-gradient(circle at ${sheenX} ${sheenY}, rgba(255,255,255,0.9) 0%, transparent 60%)`;
+
     return (
         <>
             {/* Texture Layer */}
@@ -210,9 +237,7 @@ function CardEffects({ sheenX, sheenY }: { sheenX: any, sheenY: any }) {
 
             {/* Dynamic Sheen */}
             <motion.div
-                style={{
-                    background: `radial-gradient(circle at ${sheenX} ${sheenY}, rgba(255,255,255,0.9) 0%, transparent 60%)`
-                }}
+                style={{ background }}
                 className="absolute inset-0 z-20 pointer-events-none mix-blend-soft-light opacity-50"
             />
 
@@ -278,4 +303,3 @@ function Particles() {
         </div>
     );
 }
-
