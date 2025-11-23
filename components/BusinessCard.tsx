@@ -107,7 +107,7 @@ export default function BusinessCard() {
                                 rotateY,
                                 transformStyle: "preserve-3d",
                             }}
-                            className="relative w-full max-w-[340px] md:max-w-[550px] aspect-[1.7/1] cursor-pointer group"
+                            className="relative w-full max-w-[90vw] md:max-w-[550px] aspect-[1.7/1] cursor-pointer group"
                             onClick={handleFlip}
                         >
                             {/* Floating Particles (Sparkles) */}
@@ -126,23 +126,24 @@ export default function BusinessCard() {
                                     <CardEffects sheenX={sheenX} sheenY={sheenY} />
 
                                     {/* Content */}
-                                    <div className="relative z-30 h-full flex flex-col items-center justify-center text-center p-6 md:p-12">
+                                    <div className="relative z-30 h-full flex flex-col items-center justify-center text-center p-8 md:p-12">
                                         <motion.div
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ delay: 0.3 }}
+                                            className="flex flex-col items-center"
                                         >
-                                            <h2 className="font-antonio text-[clamp(2.5rem,8vw,4.5rem)] tracking-[0.15em] text-[#1a1a1a] drop-shadow-sm leading-none uppercase">
+                                            <h2 className="font-antonio text-[clamp(1.8rem,7vw,4.5rem)] tracking-[0.2em] text-[#1a1a1a] drop-shadow-sm leading-none uppercase">
                                                 {siteConfig.designerName}
                                             </h2>
-                                            <div className="h-[1px] w-16 md:w-24 mx-auto mt-4 md:mt-6 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-80" />
-                                            <p className="font-serif italic text-[#666] text-[clamp(0.9rem,2vw,1.2rem)] mt-4 md:mt-6 tracking-wider font-light">
+                                            <div className="h-[1px] w-12 md:w-24 mx-auto mt-5 md:mt-6 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-60" />
+                                            <p className="font-serif italic text-[#666] text-[clamp(0.75rem,1.5vw,1.1rem)] mt-5 md:mt-6 tracking-[0.15em] font-light px-4">
                                                 {siteConfig.profession}
                                             </p>
                                         </motion.div>
 
-                                        <div className="absolute bottom-6 md:bottom-8 text-[#d4af37]/60 text-xs tracking-[0.2em] uppercase flex items-center gap-2 animate-pulse">
-                                            Käännä <ArrowRight size={12} />
+                                        <div className="absolute bottom-6 md:bottom-8 text-[#d4af37]/60 text-[10px] tracking-[0.25em] uppercase flex items-center gap-2 animate-pulse">
+                                            Käännä <ArrowRight size={10} />
                                         </div>
                                     </div>
                                 </div>
@@ -161,13 +162,13 @@ export default function BusinessCard() {
                                         {/* Close Button (Only visible on back or accessible via outside click) */}
                                         <button
                                             onClick={(e) => { e.stopPropagation(); closeContact(); }}
-                                            className="absolute top-2 right-2 md:top-4 md:right-4 text-[#d4af37]/60 hover:text-[#d4af37] transition-colors p-4 z-50"
+                                            className="absolute top-4 right-4 text-[#d4af37] hover:text-[#b39025] transition-all p-2.5 z-50 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:shadow-md hover:scale-105 active:scale-95 border border-[#d4af37]/10"
                                             aria-label="Sulje"
                                         >
-                                            <X size={24} strokeWidth={1.5} />
+                                            <X size={18} strokeWidth={1.5} />
                                         </button>
 
-                                        <div className="space-y-6 md:space-y-8 w-full max-w-xs mx-auto mt-2">
+                                        <div className="space-y-5 md:space-y-8 w-full max-w-xs mx-auto mt-4">
                                             <ContactItem
                                                 href={`mailto:${siteConfig.email}`}
                                                 icon={Mail}
@@ -183,14 +184,13 @@ export default function BusinessCard() {
                                                 icon={Instagram}
                                                 text={siteConfig.instagramHandle}
                                             />
-                                            <div className="flex items-center justify-center gap-4 text-sm tracking-[0.15em] text-zinc-400 pt-2">
-                                                <MapPin size={14} className="text-[#d4af37]/50" />
-                                                <span className="uppercase text-[10px] md:text-xs font-medium">{siteConfig.location}</span>
+                                            <div className="flex items-center justify-center gap-3 text-sm tracking-[0.15em] text-zinc-400 pt-3 border-t border-[#d4af37]/10 w-2/3 mx-auto">
+                                                <MapPin size={12} className="text-[#d4af37]/50" />
+                                                <span className="uppercase text-[9px] md:text-xs font-medium tracking-[0.2em]">{siteConfig.location}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </motion.div>
                         </motion.div>
                     </div>
@@ -206,23 +206,23 @@ function CardEffects({ sheenX, sheenY }: { sheenX: any, sheenY: any }) {
     return (
         <>
             {/* Texture Layer */}
-            <div className="absolute inset-0 opacity-[0.4] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-multiply pointer-events-none filter contrast-125" />
+            <div className="absolute inset-0 opacity-[0.35] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-multiply pointer-events-none filter contrast-125" />
 
             {/* Dynamic Sheen */}
             <motion.div
                 style={{
-                    background: `radial-gradient(circle at ${sheenX} ${sheenY}, rgba(255,255,255,0.8) 0%, transparent 50%)`
+                    background: `radial-gradient(circle at ${sheenX} ${sheenY}, rgba(255,255,255,0.9) 0%, transparent 60%)`
                 }}
-                className="absolute inset-0 z-20 pointer-events-none mix-blend-soft-light opacity-60"
+                className="absolute inset-0 z-20 pointer-events-none mix-blend-soft-light opacity-50"
             />
 
             {/* Gold Border Accent */}
-            <div className="absolute inset-[8px] md:inset-[12px] border border-[#d4af37]/20 z-10 pointer-events-none rounded-lg" />
-            <div className="absolute inset-[12px] md:inset-[16px] border border-[#d4af37]/10 z-10 pointer-events-none rounded-lg" />
+            <div className="absolute inset-[6px] md:inset-[12px] border border-[#d4af37]/20 z-10 pointer-events-none rounded-[10px]" />
+            <div className="absolute inset-[10px] md:inset-[16px] border border-[#d4af37]/10 z-10 pointer-events-none rounded-[8px]" />
 
             {/* Watermark */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none z-0">
-                <h1 className="font-antonio text-[150px] md:text-[200px] text-black tracking-tighter leading-none select-none">{siteConfig.initials}</h1>
+            <div className="absolute inset-0 flex items-center justify-center opacity-[0.02] pointer-events-none z-0">
+                <h1 className="font-antonio text-[120px] md:text-[200px] text-black tracking-tighter leading-none select-none">{siteConfig.initials}</h1>
             </div>
         </>
     );
@@ -240,7 +240,7 @@ function ContactItem({ href, icon: Icon, text }: { href: string, icon: any, text
             <div className="p-2 md:p-2.5 rounded-full bg-[#d4af37]/5 border border-[#d4af37]/20 group-hover:border-[#d4af37]/50 transition-colors">
                 <Icon size={14} className="text-[#d4af37]" />
             </div>
-            <span className="uppercase text-[11px] md:text-xs font-medium group-hover:tracking-[0.2em] transition-all">{text}</span>
+            <span className="uppercase text-[10px] md:text-xs font-medium group-hover:tracking-[0.2em] transition-all">{text}</span>
         </a>
     );
 }
