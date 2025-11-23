@@ -4,6 +4,7 @@ import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState } from "react";
 import { useUI } from "@/context/UIContext";
 import { siteConfig } from "@/lib/config";
+import Link from "next/link";
 
 import Logo from "@/components/Logo";
 
@@ -42,8 +43,9 @@ export default function Navbar() {
                 <Logo />
             </div>
             <div className={`hidden sm:flex gap-8 text-sm font-medium tracking-widest transition-colors ${scrolled ? "text-zinc-600" : "text-zinc-600"}`}>
-                <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-zinc-900 transition-colors uppercase">Etusivu</button>
-                <button onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-zinc-900 transition-colors uppercase">Kokoelma</button>
+                <Link href="/" className="hover:text-zinc-900 transition-colors uppercase">Etusivu</Link>
+                <Link href="/#gallery" className="hover:text-zinc-900 transition-colors uppercase">Kokoelma</Link>
+                <Link href="/tarina" className="hover:text-zinc-900 transition-colors uppercase">Tarina</Link>
                 <button onClick={openContact} className="hover:text-zinc-900 transition-colors uppercase">Yhteystiedot</button>
             </div>
             <button className="sm:hidden text-zinc-900">

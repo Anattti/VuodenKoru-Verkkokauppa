@@ -3,6 +3,7 @@
 import { motion, AnimatePresence, useMotionTemplate, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import TransitionLink from "@/components/TransitionLink";
 import { useState, useEffect, MouseEvent } from "react";
 
 import FluidGlass from "./FluidGlass";
@@ -122,9 +123,11 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                 animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : -20 }}
                 transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
             >
-                <Logo />
+                <Link href="/">
+                    <Logo />
+                </Link>
                 <div className="hidden md:block" onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}><AnimatedText text="Kokoelma" /></div>
-                <div className="hidden md:block"><AnimatedText text="Tarina" /></div>
+                <div className="hidden md:block"><TransitionLink href="/tarina"><AnimatedText text="Tarina" /></TransitionLink></div>
                 <div onClick={openContact}><AnimatedText text="Ota Yhteyttä" /></div>
             </motion.div>
 

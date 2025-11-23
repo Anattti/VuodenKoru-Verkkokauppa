@@ -6,6 +6,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import { UIProvider } from "@/context/UIContext";
 import BusinessCard from "@/components/BusinessCard";
+import PageTransition from "@/components/PageTransition";
 import { siteConfig } from "@/lib/config";
 
 const playfair = Playfair_Display({
@@ -52,6 +53,7 @@ export default function RootLayout({
         className={`${playfair.variable} ${inter.variable} ${antonio.variable} ${oranienbaum.variable} ${prostoOne.variable} font-sans antialiased bg-zinc-50 text-zinc-900`}
       >
         <UIProvider>
+          <PageTransition />
           <BusinessCard />
           <SmoothScroll>{children}</SmoothScroll>
           <Analytics />
