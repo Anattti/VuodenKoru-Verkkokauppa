@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useMotionTemplate } from "framer-motion";
+import { useLenis } from "lenis/react";
 import { X, Mail, Phone, Instagram, MapPin, ArrowRight } from "lucide-react";
 import { useUI } from "@/context/UIContext";
 import { useEffect, useRef, useState } from "react";
@@ -27,6 +28,8 @@ export default function BusinessCard() {
     const sheenX = useTransform(mouseX, [-0.5, 0.5], ["0%", "200%"]);
     const sheenY = useTransform(mouseY, [-0.5, 0.5], ["0%", "200%"]);
 
+    const lenis = useLenis();
+
     // Update rect on mount and resize
     useEffect(() => {
         const updateRect = () => {
@@ -41,13 +44,20 @@ export default function BusinessCard() {
             window.addEventListener("resize", updateRect);
             window.addEventListener("scroll", updateRect);
 
+            // Lock body scroll
+            lenis?.stop();
+            document.body.style.overflow = "hidden";
+
             return () => {
                 clearTimeout(timer);
                 window.removeEventListener("resize", updateRect);
                 window.removeEventListener("scroll", updateRect);
+                // Restore body scroll
+                lenis?.start();
+                document.body.style.overflow = "";
             };
         }
-    }, [isContactOpen]);
+    }, [isContactOpen, lenis]);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         // Fallback if rect is missing, but try to use cached

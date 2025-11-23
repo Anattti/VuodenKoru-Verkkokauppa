@@ -1,5 +1,6 @@
-export const isPreview = process.env.NEXT_PUBLIC_IS_PREVIEW === 'true';
+import { isPreview } from "./env";
 
+export { isPreview };
 export const siteConfig = {
     brandName: isPreview ? "Brand Name" : "HL Korut",
     designerName: isPreview ? "Designer Name" : "Heli Lampi",

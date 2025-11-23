@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter, Antonio } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { Playfair_Display, Inter, Antonio, Oranienbaum, Prosto_One } from "next/font/google";
 import "./globals.css";
 
 import SmoothScroll from "@/components/SmoothScroll";
@@ -22,6 +23,18 @@ const antonio = Antonio({
   variable: "--font-antonio",
 });
 
+const oranienbaum = Oranienbaum({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-oranienbaum",
+});
+
+const prostoOne = Prosto_One({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-prosto-one",
+});
+
 export const metadata: Metadata = {
   title: siteConfig.metaTitle,
   description: siteConfig.metaDescription,
@@ -36,11 +49,12 @@ export default function RootLayout({
     <html lang="fi" className="scroll-smooth" suppressHydrationWarning translate="no">
       <body
         suppressHydrationWarning
-        className={`${playfair.variable} ${inter.variable} ${antonio.variable} font-sans antialiased bg-zinc-50 text-zinc-900`}
+        className={`${playfair.variable} ${inter.variable} ${antonio.variable} ${oranienbaum.variable} ${prostoOne.variable} font-sans antialiased bg-zinc-50 text-zinc-900`}
       >
         <UIProvider>
           <BusinessCard />
           <SmoothScroll>{children}</SmoothScroll>
+          <Analytics />
         </UIProvider>
       </body>
     </html>

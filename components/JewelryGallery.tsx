@@ -24,6 +24,7 @@ import img2326 from "@/assets/images/IMG_2326.webp";
 
 import { isPreview } from "@/lib/config";
 import { previewImages } from "@/lib/previewImages";
+import { useLenis } from "lenis/react";
 
 const images = isPreview ? previewImages : [
     { src: img2312, alt: "Koru 2", span: "col-span-1 row-span-2" },
@@ -45,6 +46,7 @@ const images = isPreview ? previewImages : [
 
 export default function JewelryGallery() {
     const [selectedId, setSelectedId] = useState<number | null>(null);
+    const lenis = useLenis();
 
     const handleNext = useCallback((e?: React.MouseEvent) => {
         e?.stopPropagation();
@@ -68,6 +70,21 @@ export default function JewelryGallery() {
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [selectedId, handleNext, handlePrev]);
+
+    // Lock body scroll when modal is open
+    useEffect(() => {
+        if (selectedId !== null) {
+            lenis?.stop();
+            document.body.style.overflow = "hidden";
+        } else {
+            lenis?.start();
+            document.body.style.overflow = "";
+        }
+        return () => {
+            lenis?.start();
+            document.body.style.overflow = "";
+        };
+    }, [selectedId, lenis]);
 
     return (
         <section id="gallery" className="bg-zinc-50 py-24 sm:py-32">

@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useUI } from "@/context/UIContext";
 import { siteConfig } from "@/lib/config";
 
+import Logo from "@/components/Logo";
+
 export default function Navbar() {
     const { openContact } = useUI();
     const { scrollY } = useScroll();
@@ -36,8 +38,8 @@ export default function Navbar() {
             className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 transition-colors duration-300 ${scrolled ? "bg-white/80 backdrop-blur-md border-b border-zinc-100" : "bg-transparent"
                 }`}
         >
-            <div className={`text-xl font-serif font-medium tracking-wider transition-colors ${scrolled ? "text-zinc-900" : "text-zinc-900"}`}>
-                {siteConfig.initials}
+            <div className={`transition-colors ${scrolled ? "text-zinc-900" : "text-zinc-900"}`}>
+                <Logo />
             </div>
             <div className={`hidden sm:flex gap-8 text-sm font-medium tracking-widest transition-colors ${scrolled ? "text-zinc-600" : "text-zinc-600"}`}>
                 <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-zinc-900 transition-colors uppercase">Etusivu</button>

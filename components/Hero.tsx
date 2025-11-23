@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, AnimatePresence, useMotionTemplate, useMotionValue, useSpring } from "framer-motion";
+import { motion, AnimatePresence, useMotionTemplate, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect, MouseEvent } from "react";
 
 import FluidGlass from "./FluidGlass";
@@ -9,8 +10,16 @@ import { useUI } from "@/context/UIContext";
 import { siteConfig, isPreview } from "@/lib/config";
 import { previewHeroImage } from "@/lib/previewImages";
 
+import Logo from "@/components/Logo";
+import { GlassCard } from '@developer-hub/liquid-glass';
+
 export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
     const { openContact } = useUI();
+
+    // Scroll effects for button
+    const { scrollY } = useScroll();
+    const buttonY = useTransform(scrollY, [0, 300], [0, 100]); // Parallax effect
+    const buttonScale = useTransform(scrollY, [0, 300], [1, 1.2]); // Scale effect
 
     // Mouse position for spotlight effect
     const mouseX = useMotionValue(0);
@@ -113,7 +122,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                 animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : -20 }}
                 transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
             >
-                <AnimatedText text={siteConfig.brandName} />
+                <Logo />
                 <div className="hidden md:block" onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}><AnimatedText text="Kokoelma" /></div>
                 <div className="hidden md:block"><AnimatedText text="Tarina" /></div>
                 <div onClick={openContact}><AnimatedText text="Ota Yhteyttä" /></div>
@@ -131,6 +140,24 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                     <h1 className="flex flex-col items-center justify-center leading-[0.85] font-thin tracking-[-0.2em] md:tracking-[-0.7em] text-white opacity-95 font-antonio drop-shadow-2xl" style={{ fontFamily: 'var(--font-antonio)' }}>
                         <span className="text-[18vw] uppercase">{siteConfig.designerName}</span>
                     </h1>
+                    <motion.div
+                        className="mt-14 md:mt-24 flex justify-center pointer-events-auto"
+                        style={{ y: buttonY, scale: buttonScale }}
+                    >
+                        <Link href="https://www.vuodenkoru.fi" target="_blank">
+                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                <GlassCard
+                                    displacementScale={100}
+                                    blurAmount={0.01}
+                                    cornerRadius={10}
+                                    padding="12px 24px"
+                                    onClick={() => console.log('Glass button clicked!')}
+                                >
+                                    <span className="text-white font-medium uppercase tracking-[0.2em] text-sm md:text-base">äänestä</span>
+                                </GlassCard>
+                            </motion.div>
+                        </Link>
+                    </motion.div>
                 </motion.div>
             </div>
 

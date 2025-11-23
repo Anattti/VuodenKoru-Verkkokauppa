@@ -11,6 +11,8 @@
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);
   --font-antonio: var(--font-antonio);
+  --font-oranienbaum: var(--font-oranienbaum);
+  --font-prosto-one: var(--font-prosto-one);
 }
 
 @media (prefers-color-scheme: dark) {
