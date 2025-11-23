@@ -29,18 +29,18 @@ const images = isPreview ? previewImages : [
     { src: img2312, alt: "Koru 2", span: "col-span-1 row-span-2" },
     { src: img2313, alt: "Koru 3", span: "col-span-1 row-span-1" },
     { src: img2314, alt: "Koru 5", span: "col-span-1 row-span-1" },
-    { src: img2317, alt: "Koru 4", span: "col-span-2 row-span-2" },
+    { src: img2317, alt: "Koru 4", span: "col-span-1 sm:col-span-2 row-span-2" },
     { src: img2318, alt: "Koru 8", span: "col-span-1 row-span-2" },
     { src: img2315, alt: "Koru 6", span: "col-span-1 row-span-1" },
     { src: img2316, alt: "Koru 7", span: "col-span-1 row-span-1" },
     { src: img2320, alt: "Koru 10", span: "col-span-1 row-span-1" },
-    { src: img2319, alt: "Koru 9", span: "col-span-2 row-span-1" },
+    { src: img2319, alt: "Koru 9", span: "col-span-1 sm:col-span-2 row-span-1" },
     { src: img2322, alt: "Koru 11", span: "col-span-1 row-span-1" },
-    { src: img2323, alt: "Koru 13", span: "col-span-2 row-span-2" },
+    { src: img2323, alt: "Koru 13", span: "col-span-1 sm:col-span-2 row-span-2" },
     { src: img2321, alt: "Koru 12", span: "col-span-1 row-span-2" },
     { src: img2324, alt: "Koru 14", span: "col-span-1 row-span-1" },
     { src: img2325, alt: "Koru 15", span: "col-span-1 row-span-1" },
-    { src: img2326, alt: "Koru 16", span: "col-span-2 row-span-1" },
+    { src: img2326, alt: "Koru 16", span: "col-span-1 sm:col-span-2 row-span-1" },
 ];
 
 export default function JewelryGallery() {
