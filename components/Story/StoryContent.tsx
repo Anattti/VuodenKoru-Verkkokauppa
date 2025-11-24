@@ -12,19 +12,19 @@ const storySections = [
         id: "inspiration",
         title: "Inspiraatio",
         text: "Täplät-korusarjan inspiraationa toimii jaguaarin ylväys, villi voima ja luonnon orgaaninen monimuotoisuus. Hopean ja tiikerinsilmän yhdistelmä tuo esiin kissapetojen itsevarmuuden ja kantajansa sisäisen voiman. Mallisto sai alkunsa näyttötyöstä ja kuvitteellisesta eteläamerikkalaisesta tutkijasta, joka rakastaa kissaeläimiä. Tarina, joka avasi tien rohkeille muodoille ja villille estetiikalle.",
-        image: "/images/TuoteKuvat/IMG_1299.webp"
+        image: "/images/TuoteKuvat/StorySection1.webp"
     },
     {
         id: "process",
         title: "Prosessi",
         text: "Yhdistän suunnittelussa luonnon tutkimisen, käsityöperinteen ja modernin teknologian. Jaguarin täplistä inspiroituneet muodot syntyivät luonnostelun ja asiakkaan mielenkiinnonkohteiden tutkimisen kautta. Jokainen koru on uniikki, sillä orgaanisten muotojen hienovarainen vaihtelu viimeistellään käsin. Teknologiaa hyödynnetään erityisesti istuvuuden ja käytettävyyden varmistamiseen, kuten choker-kaulakorun tarkassa muotoilussa.",
-        image: "/images/TuoteKuvat/Kanavaistutus tuotekuva 1 kopio.webp"
+        image: "/images/TuoteKuvat/StorySection2.webp"
     },
     {
         id: "result",
         title: "lopputulos",
         text: "Täplät on kuuden korun kokonaisuus: näyttävä käätykaulakoru, elegantti riipus, kahdet korvakorut, rannekoru ja sormus. Niissä yhdistyvät kiiltävät pinnat, täplämäiset tekstuurit sekä tiikerinsilmän lämmin hehku. Lopputuloksena on voimakas, omaleimainen korusarja, joka tuo kantajalleen itsevarmuutta – niin arkeen kuin juhlaan. Täplät erottuu rohkeudellaan, tarinallaan ja vahvalla visuaalisella identiteetillään.",
-        image: "/images/TuoteKuvat/Näyttö 2, rannekoru tuotekuvat 1 pysty.webp"
+        image: "/images/TuoteKuvat/StorySection3.webp"
     }
 ];
 
