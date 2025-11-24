@@ -42,7 +42,7 @@ export default function StoryHero() {
             </motion.div>
 
             {/* Top Navigation */}
-            <motion.div
+            {/* <motion.div
                 className="absolute top-0 left-0 right-0 z-20 flex justify-between items-start px-4 pt-4 md:px-12 md:pt-6 text-[10px] md:text-sm font-medium tracking-[0.2em] uppercase text-white/90 font-sans"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -54,7 +54,7 @@ export default function StoryHero() {
                 <div className="hidden md:block"><TransitionLink href="/"><AnimatedText text="Kokoelma" /></TransitionLink></div>
                 <div className="hidden md:block"><Link href="/tarina"><AnimatedText text="Tarina" /></Link></div>
                 <div onClick={openContact}><AnimatedText text="Ota Yhteyttä" /></div>
-            </motion.div>
+            </motion.div> */}
 
             <div className="relative z-10 flex h-full flex-col items-center justify-center text-white px-4">
                 <motion.div
@@ -71,13 +71,6 @@ export default function StoryHero() {
                     </p>
                 </motion.div>
 
-                <motion.div
-                    className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 text-sm uppercase tracking-widest"
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                >
-                    Scroll
-                </motion.div>
             </div>
 
             {/* Bottom Info */}

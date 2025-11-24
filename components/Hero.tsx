@@ -13,6 +13,7 @@ import { previewHeroImage } from "@/lib/previewImages";
 
 import Logo from "@/components/Logo";
 import { GlassCard } from '@developer-hub/liquid-glass';
+import AnimatedText from "@/components/AnimatedText";
 
 export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
     const { openContact } = useUI();
@@ -116,20 +117,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                 </motion.div>
             </div>
 
-            {/* Top Navigation */}
-            <motion.div
-                className="absolute top-0 left-0 right-0 z-20 flex justify-between items-start px-4 pt-4 md:px-12 md:pt-6 text-[10px] md:text-sm font-medium tracking-[0.2em] uppercase text-white/90 font-sans"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : -20 }}
-                transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-            >
-                <Link href="/">
-                    <Logo />
-                </Link>
-                <div className="hidden md:block" onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}><AnimatedText text="Kokoelma" /></div>
-                <div className="hidden md:block"><TransitionLink href="/tarina"><AnimatedText text="Tarina" /></TransitionLink></div>
-                <div onClick={openContact}><AnimatedText text="Ota Yhteyttä" /></div>
-            </motion.div>
+
 
             {/* Center Content */}
             <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
@@ -187,36 +175,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
     );
 }
 
-function AnimatedText({ text }: { text: string }) {
-    return (
-        <motion.div
-            className="relative overflow-hidden cursor-pointer group"
-            initial="initial"
-            whileHover="hover"
-        >
-            <motion.span
-                className="block"
-                variants={{
-                    initial: { y: 0, opacity: 1 },
-                    hover: { y: -20, opacity: 0 }
-                }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-            >
-                {text}
-            </motion.span>
-            <motion.span
-                className="absolute inset-0 block"
-                variants={{
-                    initial: { y: 20, opacity: 0 },
-                    hover: { y: 0, opacity: 1 }
-                }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-            >
-                {text}
-            </motion.span>
-        </motion.div>
-    );
-}
+
 
 function TimeDisplay() {
     const [time, setTime] = useState("");
