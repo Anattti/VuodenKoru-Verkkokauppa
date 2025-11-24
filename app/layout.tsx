@@ -39,6 +39,12 @@ const prostoOne = Prosto_One({
 export const metadata: Metadata = {
   title: siteConfig.metaTitle,
   description: siteConfig.metaDescription,
+  icons: {
+    icon: [
+      { url: "/HL-favicon.svg", media: "(prefers-color-scheme: light)" },
+      { url: "/favicon-valkoinen.svg", media: "(prefers-color-scheme: dark)" },
+    ],
+  },
 };
 
 export default function RootLayout({
