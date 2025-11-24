@@ -5,36 +5,23 @@ export default function StoryArticle() {
         <section className="bg-neutral-50 py-24">
             <div className="container mx-auto px-4 md:px-12 max-w-4xl">
                 <article className="prose prose-lg prose-neutral mx-auto">
-                    <h2 className="font-antonio text-4xl mb-8 uppercase tracking-wide">Matka Finaaliin</h2>
+                    <h2 className="font-antonio text-4xl mb-8 uppercase tracking-wide">Itsevarmuus Täplät-korusarjan ytimessä</h2>
                     <p className="lead text-xl text-gray-600 mb-8 font-serif italic">
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        Täplät-korusarjan suunnittelu alkoi halusta luoda jotakin, joka tuntuu omalta. Jaguaarin täplistä löytyi muotokieli, joka yhdistää voiman, luonnon ja pienen ripauksen viekkautta. Näiden teemojen kautta syntyi koruja, joiden toivon tuovan käyttäjälleen itsevarmuutta, aivan kuten ne ovat tuoneet minulle suunnitteluprosessin aikana.
                     </p>
 
                     <div className="space-y-6 font-sans text-gray-800 leading-relaxed">
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            Mallisto sai alkunsa opiskelujeni näyttötyöstä ja kuvitteellisesta asiakkaasta, eteläamerikkalaisesta tutkijasta, joka tarvitsi näyttävät gaalakorut. Tarina auttoi minua hahmottamaan, millaista rohkeutta ja näyttävyyttä koruilta haettiin. Luonnon orgaaniset muodot puolestaan näkyvät jokaisessa yksityiskohdassa: mikään ei ole täysin samanlaista, ja juuri se tekee koruista eläviä.
                         </p>
                         <p>
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-                            eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-                            eos qui ratione voluptatem sequi nesciunt.
+                            Hopean ja tiikerinsilmän yhdistelmä tuntui luonnolliselta valinnalta. Materiaalien värit ja hohde tukevat jaguaariteemaa ja tuovat koruihin lämpöä sekä pientä retromaisuutta. Vaikka hyödynnän suunnittelussa myös teknologiaa, jokainen koru viimeistellään käsin, se tekee niistä yksilöllisiä ja oman näköisiään.
                         </p>
                         <blockquote className="border-l-4 border-black pl-6 my-8 italic font-serif text-xl">
-                            "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+                            "Vuoden Koru -kilpailuun osallistuminen oli minulle tapa haastaa itseäni ja saada näkyvyyttä urani alkuvaiheessa. Finaalipaikka yllätti iloisesti. Se kertoo, että tekemäni työ on huomattu ja että malliston tarina ja muotokieli kantavat."
                         </blockquote>
                         <p>
-                            Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-                            Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
-                            vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-                        </p>
-                        <p>
-                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
-                            quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia
-                            deserunt mollitia animi, id est laborum et dolorum fuga.
+                            Täplät-korusarja on minulle enemmän kuin harjoitustyö tai kilpailuun osallistunut mallisto. Se on prosessi, joka on kasvattanut minua suunnittelijana – ja toivon, että sen korut saavat jatkaa tarinaansa käyttäjiensä mukana.
                         </p>
                     </div>
                 </article>
