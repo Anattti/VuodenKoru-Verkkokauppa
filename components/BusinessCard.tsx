@@ -12,6 +12,17 @@ export default function BusinessCard() {
     const cardRef = useRef<HTMLDivElement>(null);
     const rectRef = useRef<DOMRect | null>(null);
     const [isFlipped, setIsFlipped] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Check for mobile/touch device
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768 || window.matchMedia("(hover: none) and (pointer: coarse)").matches);
+        };
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
 
     // 3D Tilt Logic
     const x = useMotionValue(0);
@@ -20,7 +31,7 @@ export default function BusinessCard() {
     const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
     const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
 
-    // Adjusted tilt range for a more stable feel
+    // Adjusted tilt range for a more stable feel - Disabled on mobile
     const rotateX = useTransform(mouseY, [-0.5, 0.5], ["10deg", "-10deg"]);
     const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-10deg", "10deg"]);
 
@@ -60,6 +71,8 @@ export default function BusinessCard() {
     }, [isContactOpen, lenis]);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (isMobile) return;
+
         // Fallback if rect is missing, but try to use cached
         const rect = rectRef.current || cardRef.current?.getBoundingClientRect();
         if (!rect) return;
@@ -74,6 +87,7 @@ export default function BusinessCard() {
     };
 
     const handleMouseLeave = () => {
+        if (isMobile) return;
         x.set(0);
         y.set(0);
     };
@@ -103,7 +117,8 @@ export default function BusinessCard() {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
                         onClick={closeContact}
-                        className="fixed inset-0 z-[60] bg-zinc-100/60 backdrop-blur-md"
+                        className="fixed inset-0 z-[60] bg-zinc-100/60 backdrop-blur-md will-change-[opacity]"
+                        style={{ transform: "translateZ(0)" }} // Force hardware acceleration
                     />
 
                     {/* Card Container */}
@@ -138,8 +153,8 @@ export default function BusinessCard() {
                                 }
                             }}
                             style={{
-                                rotateX,
-                                rotateY,
+                                rotateX: isMobile ? 0 : rotateX,
+                                rotateY: isMobile ? 0 : rotateY,
                                 transformStyle: "preserve-3d",
                             }}
                             className="relative w-full max-w-[90vw] md:max-w-[550px] aspect-[1.7/1] cursor-pointer group will-change-transform"
@@ -158,7 +173,7 @@ export default function BusinessCard() {
                                 {/* ================= FRONT SIDE (BRANDING) ================= */}
                                 <div className="absolute inset-0 backface-hidden bg-[#faf9f6] rounded-xl overflow-hidden shadow-2xl border border-white/40 z-20">
                                     {/* Texture & Effects */}
-                                    <CardEffects sheenX={sheenX} sheenY={sheenY} />
+                                    <CardEffects sheenX={sheenX} sheenY={sheenY} isMobile={isMobile} />
 
                                     {/* Content */}
                                     <div className="relative z-30 h-full flex flex-col items-center justify-center text-center p-8 md:p-12">
@@ -189,7 +204,7 @@ export default function BusinessCard() {
                                     style={{ transform: "rotateY(180deg)" }}
                                 >
                                     {/* Texture & Effects */}
-                                    <CardEffects sheenX={sheenX} sheenY={sheenY} />
+                                    <CardEffects sheenX={sheenX} sheenY={sheenY} isMobile={isMobile} />
 
                                     {/* Content */}
                                     <div className="relative z-30 h-full flex flex-col items-center justify-center text-center p-6 md:p-12">
@@ -237,7 +252,7 @@ export default function BusinessCard() {
 
 // Helper Components
 
-function CardEffects({ sheenX, sheenY }: { sheenX: any, sheenY: any }) {
+function CardEffects({ sheenX, sheenY, isMobile }: { sheenX: any, sheenY: any, isMobile: boolean }) {
     const background = useMotionTemplate`radial-gradient(circle at ${sheenX} ${sheenY}, rgba(255,255,255,0.9) 0%, transparent 60%)`;
 
     return (
@@ -245,11 +260,13 @@ function CardEffects({ sheenX, sheenY }: { sheenX: any, sheenY: any }) {
             {/* Texture Layer */}
             <div className="absolute inset-0 opacity-[0.35] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-multiply pointer-events-none filter contrast-125" />
 
-            {/* Dynamic Sheen */}
-            <motion.div
-                style={{ background }}
-                className="absolute inset-0 z-20 pointer-events-none mix-blend-soft-light opacity-50"
-            />
+            {/* Dynamic Sheen - Only on desktop */}
+            {!isMobile && (
+                <motion.div
+                    style={{ background }}
+                    className="absolute inset-0 z-20 pointer-events-none mix-blend-soft-light opacity-50 will-change-[opacity]"
+                />
+            )}
 
             {/* Gold Border Accent */}
             <div className="absolute inset-[6px] md:inset-[12px] border border-[#d4af37]/20 z-10 pointer-events-none rounded-[10px]" />
@@ -295,7 +312,7 @@ function Particles() {
             {particles.map((p) => (
                 <motion.div
                     key={p.id}
-                    className="absolute w-1 h-1 bg-[#d4af37]/40 rounded-full blur-[1px]"
+                    className="absolute w-1 h-1 bg-[#d4af37]/40 rounded-full blur-[1px] will-change-transform"
                     style={{ left: `${p.x}%`, top: `${p.y}%` }}
                     animate={{
                         y: [0, -20, 0],
