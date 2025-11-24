@@ -5,8 +5,8 @@ export default function StoryArticle() {
         <section className="bg-neutral-50 py-12 md:py-24">
             <div className="container mx-auto px-4 md:px-12 max-w-4xl">
                 <article className="prose prose-neutral md:prose-lg mx-auto">
-                    <h2 className="font-antonio text-3xl md:text-4xl mb-6 md:mb-8 uppercase tracking-wide">Itsevarmuus Täplät-korusarjan ytimessä</h2>
-                    <p className="lead text-lg md:text-xl text-gray-600 mb-6 md:mb-8 font-serif italic">
+                    <h2 className="font-antonio text-3xl md:text-4xl mb-6 md:mb-8 uppercase tracking-wide text-black">Itsevarmuus Täplät-korusarjan ytimessä</h2>
+                    <p className="lead text-lg md:text-xl text-gray-800 mb-6 md:mb-8 font-serif italic">
                         Täplät-korusarjan suunnittelu alkoi halusta luoda jotakin, joka tuntuu omalta. Jaguaarin täplistä löytyi muotokieli, joka yhdistää voiman, luonnon ja pienen ripauksen viekkautta. Näiden teemojen kautta syntyi koruja, joiden toivon tuovan käyttäjälleen itsevarmuutta, aivan kuten ne ovat tuoneet minulle suunnitteluprosessin aikana.
                     </p>
 
