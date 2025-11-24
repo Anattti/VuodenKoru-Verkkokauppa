@@ -11,19 +11,19 @@ const storySections = [
     {
         id: "inspiration",
         title: "Inspiraatio",
-        text: "Luonnon kauneus ja pohjolan karu maisema toimivat inspiraationa tälle ainutlaatuiselle korulle. Jokainen yksityiskohta on harkittu tarkkaan, heijastaen valoa ja varjoa tavalla, joka tuo mieleen ensilumen kimalluksen.",
+        text: "Täplät-korusarjan inspiraationa toimii jaguaarin ylväys, villi voima ja luonnon orgaaninen monimuotoisuus. Hopean ja tiikerinsilmän yhdistelmä tuo esiin kissapetojen itsevarmuuden ja kantajansa sisäisen voiman. Mallisto sai alkunsa näyttötyöstä ja kuvitteellisesta eteläamerikkalaisesta tutkijasta, joka rakastaa kissaeläimiä. Tarina, joka avasi tien rohkeille muodoille ja villille estetiikalle.",
         image: "/images/TuoteKuvat/IMG_1299.webp"
     },
     {
         id: "process",
         title: "Prosessi",
-        text: "Kilpailutyö vaati kuukausien suunnittelun ja kymmeniä tunteja käsityötä. Materiaalivalinnat tehtiin kestävyys ja estetiikka edellä, yhdistäen perinteiset tekniikat moderniin muotoiluun.",
+        text: "Yhdistän suunnittelussa luonnon tutkimisen, käsityöperinteen ja modernin teknologian. Jaguarin täplistä inspiroituneet muodot syntyivät luonnostelun ja asiakkaan mielenkiinnonkohteiden tutkimisen kautta. Jokainen koru on uniikki, sillä orgaanisten muotojen hienovarainen vaihtelu viimeistellään käsin. Teknologiaa hyödynnetään erityisesti istuvuuden ja käytettävyyden varmistamiseen, kuten choker-kaulakorun tarkassa muotoilussa.",
         image: "/images/TuoteKuvat/Kanavaistutus tuotekuva 1 kopio.webp"
     },
     {
         id: "result",
-        title: "Tulos",
-        text: "Lopputulos on enemmän kuin koru – se on tarina, joka elää kantajansa mukana. Vuoden Koru -finaalipaikka on osoitus tinkimättömästä laadusta ja taiteellisesta näkemyksestä.",
+        title: "lopputulos",
+        text: "Täplät on kuuden korun kokonaisuus: näyttävä käätykaulakoru, elegantti riipus, kahdet korvakorut, rannekoru ja sormus. Niissä yhdistyvät kiiltävät pinnat, täplämäiset tekstuurit sekä tiikerinsilmän lämmin hehku. Lopputuloksena on voimakas, omaleimainen korusarja, joka tuo kantajalleen itsevarmuutta – niin arkeen kuin juhlaan. Täplät erottuu rohkeudellaan, tarinallaan ja vahvalla visuaalisella identiteetillään.",
         image: "/images/TuoteKuvat/Näyttö 2, rannekoru tuotekuvat 1 pysty.webp"
     }
 ];

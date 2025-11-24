@@ -64,7 +64,7 @@ export default function StoryHero() {
                     className="text-center"
                 >
                     <h1 className="font-antonio text-6xl md:text-9xl uppercase tracking-tighter mb-4">
-                        Matka Huipulle
+                        Tarina täplien takana
                     </h1>
                     <p className="font-sans text-lg md:text-xl tracking-[0.2em] uppercase opacity-80 max-w-2xl mx-auto">
                         Vuoden Koru -kilpailun finalistin tarina

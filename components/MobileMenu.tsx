@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import TransitionLink from "@/components/TransitionLink";
+import Logo from "@/components/Logo";
 import { useUI } from "@/context/UIContext";
 import { useEffect } from "react";
 
@@ -101,6 +102,13 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
+
+                    {/* Logo */}
+                    <div className="absolute top-4 left-4 z-50">
+                        <TransitionLink href="/" onClick={onClose}>
+                            <Logo />
+                        </TransitionLink>
+                    </div>
 
                     {/* Menu Links */}
                     <div className="flex flex-col items-center gap-8 text-2xl md:text-4xl font-light tracking-widest uppercase font-antonio">
