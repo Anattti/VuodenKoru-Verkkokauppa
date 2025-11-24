@@ -88,6 +88,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     initial="initial"
                     animate="animate"
                     exit="exit"
+                    style={{ willChange: "clip-path" }}
                     className="fixed inset-0 z-[60] bg-black flex flex-col items-center justify-center text-white"
                 >
                     {/* Close Button */}
@@ -103,13 +104,13 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
                     {/* Menu Links */}
                     <div className="flex flex-col items-center gap-8 text-2xl md:text-4xl font-light tracking-widest uppercase font-antonio">
-                        <motion.div custom={0} variants={linkVariants}>
-                            <TransitionLink href="/" onClick={handleLinkClick} className="hover:text-white/70 transition-colors">
+                        <motion.div custom={0} variants={linkVariants} style={{ willChange: "transform, opacity" }}>
+                            <Link href="/" onClick={handleLinkClick} className="hover:text-white/70 transition-colors">
                                 Etusivu
-                            </TransitionLink>
+                            </Link>
                         </motion.div>
 
-                        <motion.div custom={1} variants={linkVariants}>
+                        <motion.div custom={1} variants={linkVariants} style={{ willChange: "transform, opacity" }}>
                             <button
                                 onClick={() => {
                                     document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' });
@@ -121,13 +122,13 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                             </button>
                         </motion.div>
 
-                        <motion.div custom={2} variants={linkVariants}>
+                        <motion.div custom={2} variants={linkVariants} style={{ willChange: "transform, opacity" }}>
                             <TransitionLink href="/tarina" onClick={handleLinkClick} className="hover:text-white/70 transition-colors">
                                 Tarina
                             </TransitionLink>
                         </motion.div>
 
-                        <motion.div custom={3} variants={linkVariants}>
+                        <motion.div custom={3} variants={linkVariants} style={{ willChange: "transform, opacity" }}>
                             <button onClick={handleContactClick} className="hover:text-white/70 transition-colors uppercase">
                                 Ota Yhteyttä
                             </button>
