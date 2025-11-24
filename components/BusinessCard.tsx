@@ -122,7 +122,10 @@ export default function BusinessCard() {
                     />
 
                     {/* Card Container */}
-                    <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 perspective-2000">
+                    <div
+                        className="fixed inset-0 z-[70] flex items-center justify-center p-4 perspective-2000"
+                        onClick={closeContact}
+                    >
                         <motion.div
                             ref={cardRef}
                             onMouseMove={handleMouseMove}
@@ -212,10 +215,10 @@ export default function BusinessCard() {
                                         {/* Close Button (Only visible on back or accessible via outside click) */}
                                         <button
                                             onClick={(e) => { e.stopPropagation(); closeContact(); }}
-                                            className="absolute top-4 right-4 text-[#d4af37] hover:text-[#b39025] transition-all p-2.5 z-50 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:shadow-md hover:scale-105 active:scale-95 border border-[#d4af37]/10"
+                                            className="absolute top-4 right-4 text-[#d4af37] hover:text-[#b39025] transition-all p-4 z-50 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:shadow-md hover:scale-105 active:scale-95 border border-[#d4af37]/10 cursor-pointer"
                                             aria-label="Sulje"
                                         >
-                                            <X size={18} strokeWidth={1.5} />
+                                            <X size={16} strokeWidth={2.5} />
                                         </button>
 
                                         <div className="space-y-5 md:space-y-8 w-full max-w-xs mx-auto mt-4">
