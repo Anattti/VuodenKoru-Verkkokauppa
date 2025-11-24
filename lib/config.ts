@@ -13,7 +13,7 @@ export const siteConfig = {
     instagramUrl: isPreview ? "https://instagram.com" : "https://instagram.com/h.l.korut",
     facebookUrl: isPreview ? "https://facebook.com" : "https://www.facebook.com/people/Heli-Lampi/61561959849448/#",
     tiktokUrl: isPreview ? "https://tiktok.com" : "https://www.tiktok.com/@h.l.korut?_r=1&_t=ZN-91cUxnewSUI",
-    profession: isPreview ? "Jewelry Designer" : "Jalometallialan artesaani",
+    profession: isPreview ? "Jewelry Designer | Goldsmith Student" : "Jalometallialan artesaani | Kultaseppäopiskelija",
     slogan: isPreview ? "Design that speaks. Craft that lasts." : "Design, joka puhuttelee. Muotoilu, joka kestää.",
     description: isPreview
         ? "The designer's jewelry has been selected as a finalist in the Design Contest 2026. This recognition is a testament to uncompromising quality and unique vision."
