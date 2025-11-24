@@ -44,6 +44,9 @@ export const metadata: Metadata = {
       { url: "/HL-favicon.svg", media: "(prefers-color-scheme: light)" },
       { url: "/favicon-valkoinen.svg", media: "(prefers-color-scheme: dark)" },
     ],
+    apple: [
+      { url: "/HL-favicon.svg" },
+    ],
   },
 };
 
