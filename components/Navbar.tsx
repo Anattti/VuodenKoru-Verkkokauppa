@@ -23,9 +23,9 @@ export default function Navbar() {
                 className="absolute top-0 left-0 right-0 z-50 flex justify-between items-start px-4 pt-4 md:px-12 md:pt-6 text-[10px] md:text-sm font-medium tracking-[0.2em] uppercase text-white/90 font-sans"
             >
                 <div>
-                    <Link href="/">
+                    <TransitionLink href="/">
                         <Logo />
-                    </Link>
+                    </TransitionLink>
                 </div>
                 <div className="hidden md:block cursor-pointer" onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}><AnimatedText text="Kokoelma" /></div>
                 <div className="hidden md:block"><TransitionLink href="/tarina"><AnimatedText text="Tarina" /></TransitionLink></div>

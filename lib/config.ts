@@ -1,6 +1,6 @@
-import { isPreview } from "./env";
+import { isPreview as isPreviewEnv } from "./env";
 
-export { isPreview };
+export const isPreview = isPreviewEnv;
 export const siteConfig = {
     brandName: isPreview ? "Brand Name" : "HL Korut",
     designerName: isPreview ? "Designer Name" : "Heli Lampi",

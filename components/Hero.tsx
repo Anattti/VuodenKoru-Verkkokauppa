@@ -14,6 +14,7 @@ import { previewHeroImage } from "@/lib/previewImages";
 import Logo from "@/components/Logo";
 import { GlassCard } from '@developer-hub/liquid-glass';
 import AnimatedText from "@/components/AnimatedText";
+import img2323 from "@/assets/images/IMG_2323.webp";
 
 export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
     const { openContact } = useUI();
@@ -95,7 +96,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                     transition={{ duration: 2.5, ease: "easeOut" }}
                 >
                     <Image
-                        src={isPreview ? previewHeroImage : "/IMG_2323.webp"}
+                        src={isPreview ? previewHeroImage : img2323}
                         alt={`${siteConfig.designerName} Jewelry Background`}
                         fill
                         className="object-cover"

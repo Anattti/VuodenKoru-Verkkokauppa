@@ -104,9 +104,9 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     {/* Menu Links */}
                     <div className="flex flex-col items-center gap-8 text-2xl md:text-4xl font-light tracking-widest uppercase font-antonio">
                         <motion.div custom={0} variants={linkVariants}>
-                            <Link href="/" onClick={handleLinkClick} className="hover:text-white/70 transition-colors">
+                            <TransitionLink href="/" onClick={handleLinkClick} className="hover:text-white/70 transition-colors">
                                 Etusivu
-                            </Link>
+                            </TransitionLink>
                         </motion.div>
 
                         <motion.div custom={1} variants={linkVariants}>
