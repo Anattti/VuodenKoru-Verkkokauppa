@@ -31,7 +31,7 @@ export default function StoryHero() {
                 className="absolute inset-0 z-0"
             >
                 <Image
-                    src="/images/TuoteKuvat/Rannekoru tunnelmakuva laaja kopio.webp"
+                    src="/images/TuoteKuvat/StorySectionHero.webp"
                     alt="Story Hero Background"
                     fill
                     className="object-cover"

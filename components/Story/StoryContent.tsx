@@ -12,7 +12,7 @@ const storySections = [
         id: "inspiration",
         title: "Inspiraatio",
         text: "Täplät-korusarjan inspiraationa toimii jaguaarin ylväys, villi voima ja luonnon orgaaninen monimuotoisuus. Hopean ja tiikerinsilmän yhdistelmä tuo esiin kissapetojen itsevarmuuden ja kantajansa sisäisen voiman. Mallisto sai alkunsa näyttötyöstä ja kuvitteellisesta eteläamerikkalaisesta tutkijasta, joka rakastaa kissaeläimiä. Tarina, joka avasi tien rohkeille muodoille ja villille estetiikalle.",
-        image: "/images/TuoteKuvat/StorySection1.webp"
+        image: "/images/TuoteKuvat/StorySection4.webp"
     },
     {
         id: "process",
