@@ -171,7 +171,7 @@ export default function JewelryGallery() {
 
                             {/* Image Info Overlay */}
                             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 sm:p-8 pt-24 text-white">
-                                <motion.h3
+                                {/* <motion.h3
                                     initial={{ y: 20, opacity: 0 }}
                                     animate={{ y: 0, opacity: 1 }}
                                     transition={{ delay: 0.2 }}
@@ -186,7 +186,7 @@ export default function JewelryGallery() {
                                     className="text-white/80 mt-2 font-light tracking-wide"
                                 >
                                     Uniikki kappale
-                                </motion.p>
+                                </motion.p> */}
                             </div>
                         </motion.div>
                     </motion.div>

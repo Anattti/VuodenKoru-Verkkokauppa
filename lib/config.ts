@@ -1,6 +1,5 @@
-import { isPreview as isPreviewEnv } from "./env";
+export const isPreview = process.env.NEXT_PUBLIC_IS_PREVIEW === 'true';
 
-export const isPreview = isPreviewEnv;
 export const siteConfig = {
     brandName: isPreview ? "Brand Name" : "HL Korut",
     designerName: isPreview ? "Designer Name" : "Heli Lampi",
@@ -15,10 +14,10 @@ export const siteConfig = {
     facebookUrl: isPreview ? "https://facebook.com" : "https://www.facebook.com/people/Heli-Lampi/61561959849448/#",
     tiktokUrl: isPreview ? "https://tiktok.com" : "https://www.tiktok.com/@h.l.korut?_r=1&_t=ZN-91cUxnewSUI",
     profession: isPreview ? "Jewelry Designer" : "Jalometallialan artesaani",
-    slogan: isPreview ? "Design that speaks. Craft that lasts." : "Muotoilu, joka puhuttelee. Käsityö, joka kestää.",
+    slogan: isPreview ? "Design that speaks. Craft that lasts." : "Design, joka puhuttelee. Muotoilu, joka kestää.",
     description: isPreview
         ? "The designer's jewelry has been selected as a finalist in the Design Contest 2026. This recognition is a testament to uncompromising quality and unique vision."
-        : "Heli Lammen korut on valittu Vuoden Koru 2026 -kilpailun finaaliin. Tämä tunnustus on osoitus tinkimättömästä laadusta ja ainutlaatuisesta näkemyksestä suomalaisessa korumuotoilussa.",
+        : "Täplät-korusarja on valittu Vuoden Koru 2026 -finalistiksi. Vuoden Koru -finaalipaikka on osoitus tinkimättömästä laadusta ja taiteellisesta näkemyksestä.",
     metaTitle: isPreview ? "Designer Name | Finalist 2026" : "Heli Lampi | Vuoden Koru 2026 Finalisti",
     metaDescription: isPreview
         ? "Discover the finalist jewelry collection. Unique design."

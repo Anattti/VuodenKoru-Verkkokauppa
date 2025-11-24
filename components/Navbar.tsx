@@ -12,9 +12,12 @@ import MobileMenu from "@/components/MobileMenu";
 import AnimatedText from "@/components/AnimatedText";
 import TransitionLink from "@/components/TransitionLink";
 
+import { usePathname } from "next/navigation";
+
 export default function Navbar() {
     const { openContact } = useUI();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const pathname = usePathname();
 
     return (
         <>
@@ -27,7 +30,17 @@ export default function Navbar() {
                         <Logo />
                     </TransitionLink>
                 </div>
-                <div className="hidden md:block cursor-pointer" onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}><AnimatedText text="Kokoelma" /></div>
+                {pathname === "/" ? (
+                    <div className="hidden md:block cursor-pointer" onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}>
+                        <AnimatedText text="Kokoelma" />
+                    </div>
+                ) : (
+                    <div className="hidden md:block">
+                        <TransitionLink href="/#gallery">
+                            <AnimatedText text="Kokoelma" />
+                        </TransitionLink>
+                    </div>
+                )}
                 <div className="hidden md:block"><TransitionLink href="/tarina"><AnimatedText text="Tarina" /></TransitionLink></div>
                 <div className="hidden md:block" onClick={openContact}><AnimatedText text="Ota Yhteyttä" /></div>
 
