@@ -145,7 +145,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                                     padding="12px 24px"
                                     onClick={() => console.log('Glass button clicked!')}
                                 >
-                                    <span className="text-white font-medium uppercase tracking-[0.2em] text-sm md:text-base">äänestä</span>
+                                    <span className="text-white font-medium uppercase tracking-[0.2em] text-sm md:text-base">äänestä Vuoden Koru finalistia</span>
                                 </GlassCard>
                             </motion.div>
                         </Link>
