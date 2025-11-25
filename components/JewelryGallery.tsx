@@ -102,7 +102,7 @@ export default function JewelryGallery() {
                     <p className="mt-4 text-zinc-500">Uniikkeja teoksia, jotka kertovat tarinaa.</p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[300px] grid-flow-dense">
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[300px] grid-flow-dense">
                     {images.map((img, index) => (
                         <GalleryItem
                             key={index}
