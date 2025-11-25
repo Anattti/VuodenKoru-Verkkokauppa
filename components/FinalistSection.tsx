@@ -23,6 +23,26 @@ export default function FinalistSection() {
                             {siteConfig.description}
                         </p>
                     </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                        className="mt-12 flex flex-col items-center gap-6"
+                    >
+                        <p className="text-lg font-light text-zinc-900 italic font-serif">
+                            Lue koko artikkeli Vuoden Koru -kisasta
+                        </p>
+                        <a
+                            href="https://julesandberyl.fi/taplat-heli-lampi-vuoden-koru-2026-finalisti/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-zinc-900 bg-zinc-900 px-8 py-3 text-sm font-medium uppercase tracking-widest text-white transition-all hover:bg-transparent hover:text-zinc-900"
+                        >
+                            <span className="relative z-10">Lue lisää</span>
+                        </a>
+                    </motion.div>
                 </div>
             </div>
         </section>
