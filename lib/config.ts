@@ -10,7 +10,7 @@ export const siteConfig = {
     email: isPreview ? "contact@example.com" : "helilampi@icloud.com",
     phone: isPreview ? "+123 456 7890" : "+358 44 343 7802",
     instagramHandle: isPreview ? "@brand.name" : "@h.l.korut",
-    instagramUrl: isPreview ? "https://instagram.com" : "https://instagram.com/h.l.korut",
+    instagramUrl: isPreview ? "https://instagram.com" : "https://www.instagram.com/h.l.korut",
     facebookUrl: isPreview ? "https://facebook.com" : "https://www.facebook.com/people/Heli-Lampi/61561959849448/#",
     tiktokUrl: isPreview ? "https://tiktok.com" : "https://www.tiktok.com/@h.l.korut?_r=1&_t=ZN-91cUxnewSUI",
     profession: isPreview ? "Jewelry Designer | Goldsmith Student" : "Jalometallialan artesaani | Kultaseppäopiskelija",

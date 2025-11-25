@@ -25,8 +25,8 @@ export default function Footer() {
                     <a href={siteConfig.tiktokUrl} className="hover:text-zinc-900 transition-colors block">
                         <AnimatedText text="TikTok" />
                     </a>
-                    <button onClick={handleContactClick} className="hover:text-white/70 transition-colors">
-                        Ota Yhteyttä
+                    <button onClick={handleContactClick} className="hover:text-zinc-900 transition-colors block">
+                        <AnimatedText text="Ota Yhteyttä" />
                     </button>
                 </div>
                 <p className="mt-12 text-xs opacity-50">{siteConfig.copyright}</p>

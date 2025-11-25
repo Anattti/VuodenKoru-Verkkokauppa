@@ -277,7 +277,7 @@ function CardEffects({ sheenX, sheenY, isMobile }: { sheenX: any, sheenY: any, i
 
             {/* Watermark */}
             <div className="absolute inset-0 flex items-center justify-center opacity-[0.02] pointer-events-none z-0">
-                <h1 className="font-antonio text-[120px] md:text-[200px] text-black tracking-tighter leading-none select-none">{siteConfig.initials}</h1>
+                <div className="font-antonio text-[120px] md:text-[200px] text-black tracking-tighter leading-none select-none">{siteConfig.initials}</div>
             </div>
         </>
     );
