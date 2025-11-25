@@ -1,4 +1,4 @@
-export const isPreview = process.env.NEXT_PUBLIC_IS_PREVIEW === 'true';
+export const isPreview = process.env.NEXT_PUBLIC_IS_PREVIEW === 'false';
 
 export const siteConfig = {
     brandName: isPreview ? "Brand Name" : "HL Korut",

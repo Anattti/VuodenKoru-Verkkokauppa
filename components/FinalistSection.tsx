@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 import { motion } from "framer-motion";
 import { siteConfig } from "@/lib/config";
 
@@ -24,19 +22,6 @@ export default function FinalistSection() {
                         <p className="text-lg font-light leading-relaxed text-zinc-600 sm:text-xl">
                             {siteConfig.description}
                         </p>
-
-                        <div className="mt-12 flex flex-col items-center gap-6">
-                            <p className="text-lg font-serif italic text-zinc-800">
-                                Lue koko artikkeli Vuoden Koru -kisasta
-                            </p>
-                            <Link
-                                href="https://julesandberyl.fi/taplat-heli-lampi-vuoden-koru-2026-finalisti/"
-                                target="_blank"
-                                className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-zinc-900 px-8 py-3 text-sm font-medium text-white transition-all hover:bg-zinc-800 hover:scale-105"
-                            >
-                                <span className="relative z-10">Lue lisää</span>
-                            </Link>
-                        </div>
                     </motion.div>
                 </div>
             </div>
