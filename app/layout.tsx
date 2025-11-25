@@ -39,15 +39,6 @@ const prostoOne = Prosto_One({
 export const metadata: Metadata = {
   title: siteConfig.metaTitle,
   description: siteConfig.metaDescription,
-  icons: {
-    icon: [
-      { url: "/favicon.ico", type: "image/x-icon", sizes: "any" },
-      { url: "/favicon-valkoinen.ico", type: "image/x-icon", sizes: "any", media: "(prefers-color-scheme: dark)" },
-    ],
-    apple: [
-      { url: "/favicon.ico" },
-    ],
-  },
 };
 
 export default function RootLayout({
