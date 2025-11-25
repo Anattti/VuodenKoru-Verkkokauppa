@@ -2,8 +2,14 @@
 
 import { motion } from "framer-motion";
 import { siteConfig } from "@/lib/config";
+import { useUI } from "@/context/UIContext";
 
 export default function Footer() {
+    const { openContact } = useUI();
+
+    const handleContactClick = () => {
+        openContact();
+    };
     return (
         <footer className="bg-zinc-100 py-12 text-center text-zinc-500">
             <div className="container mx-auto px-4">
@@ -19,9 +25,9 @@ export default function Footer() {
                     <a href={siteConfig.tiktokUrl} className="hover:text-zinc-900 transition-colors block">
                         <AnimatedText text="TikTok" />
                     </a>
-                    <a href="#" className="hover:text-zinc-900 transition-colors block">
-                        <AnimatedText text="Ota yhteyttä" />
-                    </a>
+                    <button onClick={handleContactClick} className="hover:text-white/70 transition-colors">
+                        Ota Yhteyttä
+                    </button>
                 </div>
                 <p className="mt-12 text-xs opacity-50">{siteConfig.copyright}</p>
             </div>
