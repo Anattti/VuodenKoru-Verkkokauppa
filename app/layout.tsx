@@ -41,11 +41,11 @@ export const metadata: Metadata = {
   description: siteConfig.metaDescription,
   icons: {
     icon: [
-      { url: "/favicon-musta.png", media: "(prefers-color-scheme: light)" },
-      { url: "/favicon-valkoinen.png", media: "(prefers-color-scheme: dark)" },
+      { url: "/favicon.ico", type: "image/x-icon", sizes: "any" },
+      { url: "/favicon-valkoinen.ico", type: "image/x-icon", sizes: "any", media: "(prefers-color-scheme: dark)" },
     ],
     apple: [
-      { url: "/favicon-musta.png" },
+      { url: "/favicon.ico" },
     ],
   },
 };
