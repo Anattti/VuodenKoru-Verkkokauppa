@@ -12,7 +12,6 @@ import { siteConfig, isPreview } from "@/lib/config";
 import { previewHeroImage } from "@/lib/previewImages";
 
 import Logo from "@/components/Logo";
-import { GlassCard } from '@developer-hub/liquid-glass';
 import CssGlassButton from "@/components/CssGlassButton";
 import AnimatedText from "@/components/AnimatedText";
 import img2323 from "@/assets/images/IMG_2323.webp";
@@ -29,29 +28,6 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
     const [isHovering, setIsHovering] = useState(false);
-    const [isMounted, setIsMounted] = useState(false);
-    const [buttonKey, setButtonKey] = useState(0);
-    const buttonRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        setIsMounted(true);
-
-        const updateKey = () => {
-            setButtonKey(prev => prev + 1);
-        };
-
-        // 1. Initial update
-        const timer = setTimeout(updateKey, 100);
-
-        // 2. Watch for font loading
-        document.fonts.ready.then(() => {
-            updateKey();
-        });
-
-        return () => {
-            clearTimeout(timer);
-        };
-    }, []);
 
     // Smooth spring animation for the spotlight
     const springConfig = { damping: 20, stiffness: 100, mass: 0.5 }; // Softer spring for ambient feel
@@ -161,27 +137,18 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                         style={{ y: buttonY, scale: buttonScale }}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-                        transition={{ duration: 0.6, delay: 1.5, ease: "easeOut" }}
+                        transition={{ duration: 0.6, delay: 2, ease: "easeOut" }}
                     >
                         <Link href="https://www.vuodenkoru.fi" target="_blank">
                             <motion.div
-                                ref={buttonRef}
-                                className="relative inline-block"
+                                className="relative flex justify-center"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                {isMounted && (
-                                    <GlassCard
-                                        key={buttonKey}
-                                        displacementScale={100}
-                                        blurAmount={0.01}
-                                        cornerRadius={10}
-                                        padding="12px 24px"
-                                        onClick={() => console.log('Glass button clicked!')}
-                                    >
-                                        <span className="text-white font-medium uppercase tracking-[0.2em] text-sm md:text-base">äänestä Vuoden Koru finalistia</span>
-                                    </GlassCard>
-                                )}
+                                <CssGlassButton
+                                    text="äänestä Vuoden Koru finalistia"
+                                    onClick={() => console.log('Glass button clicked!')}
+                                />
                             </motion.div>
                         </Link>
                     </motion.div>
