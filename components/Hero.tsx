@@ -99,7 +99,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                         src={isPreview ? previewHeroImage : img2323}
                         alt={`${siteConfig.designerName} Jewelry Background`}
                         fill
-                        className="object-cover"
+                        className="object-cover object-[40%_50%] md:object-center"
                         priority
                         quality={100}
                     />
