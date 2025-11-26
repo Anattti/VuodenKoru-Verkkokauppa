@@ -121,36 +121,107 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
 
 
             {/* Center Content */}
-            <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
+            <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center pb-12 md:pb-0">
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0.9 }}
-                    transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                    className="relative w-full"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0.95 }}
+                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                    className="relative w-full max-w-5xl mx-auto flex flex-col items-center"
                 >
-                    <div className="absolute inset-0 -z-10 bg-black/50 blur-3xl rounded-full transform scale-150 opacity-50" />
-                    <h1 className="flex flex-col items-center justify-center leading-[0.85] font-thin tracking-[-0.2em] md:tracking-[-0.7em] text-white opacity-95 font-antonio drop-shadow-2xl" style={{ fontFamily: 'var(--font-antonio)' }}>
-                        <span className="text-[18vw] uppercase">{siteConfig.designerName}</span>
-                    </h1>
+                    {/* Darker blur for better text contrast */}
+                    <div className="absolute inset-0 -z-10 bg-black/20 blur-[100px] rounded-full transform scale-125 opacity-60" />
+
+                    {/* Premium Badge */}
                     <motion.div
-                        className="mt-14 md:mt-24 flex justify-center pointer-events-auto"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.8, duration: 0.8 }}
+                        className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/40 bg-black/20 px-6 py-2 backdrop-blur-md shadow-[0_0_15px_rgba(212,175,55,0.1)]"
+                    >
+                        <div className="h-1.5 w-1.5 rounded-full bg-[#D4AF37] animate-pulse" />
+                        <span className="text-xs md:text-sm font-medium tracking-[0.2em] uppercase text-[#F4E5B0]">
+                            Vuoden Koru 2026 Finalisti
+                        </span>
+                        <div className="h-1.5 w-1.5 rounded-full bg-[#D4AF37] animate-pulse" />
+                    </motion.div>
+
+                    {/* Headline Group */}
+                    <div className="relative mb-8 flex flex-col items-center">
+                        <h1 className="flex flex-col items-center justify-center leading-[0.9] text-white drop-shadow-2xl">
+                            <span
+                                className="text-6xl md:text-8xl lg:text-9xl uppercase tracking-tighter font-antonio opacity-95"
+                                style={{ fontFamily: 'var(--font-antonio)' }}
+                            >
+                                Täplät
+                            </span>
+                            <span
+                                className="text-6xl md:text-8xl lg:text-9xl uppercase tracking-tighter font-antonio opacity-95"
+                                style={{ fontFamily: 'var(--font-antonio)' }}
+                            >
+                                Korusarja
+                            </span>
+                        </h1>
+                        <motion.span
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 1.0, duration: 0.8 }}
+                            className="mt-4 text-2xl md:text-4xl font-serif italic text-white/90 tracking-wide"
+                            style={{ fontFamily: 'var(--font-playfair)' }}
+                        >
+                            Vuoden Koru 2026 finalisti
+                        </motion.span>
+                    </div>
+
+                    {/* Ingress */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.2, duration: 0.8 }}
+                        className="max-w-xl text-center mb-12"
+                    >
+                        <p className="text-base md:text-lg text-white/80 leading-relaxed font-light tracking-wide">
+                            <span className="block mb-2 font-medium text-white/90 uppercase tracking-widest text-xs">Suomalainen käsityö Reisjärveltä</span>
+                            Näyttävää, ajatonta muotoilua, arkeen ja juhlaan.
+                        </p>
+                    </motion.div>
+
+                    {/* CTAs */}
+                    <motion.div
+                        className="flex flex-col md:flex-row items-center gap-4 md:gap-8 pointer-events-auto"
                         style={{ y: buttonY, scale: buttonScale }}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-                        transition={{ duration: 0.6, delay: 2, ease: "easeOut" }}
+                        transition={{ duration: 0.6, delay: 1.4, ease: "easeOut" }}
                     >
+                        {/* Primary CTA */}
                         <Link href="https://www.vuodenkoru.fi" target="_blank">
                             <motion.div
                                 className="relative flex justify-center"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
                             >
                                 <CssGlassButton
-                                    text="äänestä Vuoden Koru finalistia"
-                                    onClick={() => console.log('Glass button clicked!')}
+                                    text="Äänestä nyt"
+                                    className="!px-12 !py-4"
                                 />
                             </motion.div>
                         </Link>
+
+                        {/* Secondary CTA */}
+                        <motion.div
+                            className="relative flex justify-center"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            <CssGlassButton
+                                text="Katso kokoelma"
+                                className="!px-12 !py-4"
+                                onClick={() => {
+                                    const gallery = document.getElementById('gallery');
+                                    gallery?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                            />
+                        </motion.div>
                     </motion.div>
                 </motion.div>
             </div>
