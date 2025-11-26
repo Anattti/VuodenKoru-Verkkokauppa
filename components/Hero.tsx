@@ -125,51 +125,40 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0.95 }}
-                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                    transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
                     className="relative w-full max-w-5xl mx-auto flex flex-col items-center"
                 >
                     {/* Darker blur for better text contrast */}
                     <div className="absolute inset-0 -z-10 bg-black/20 blur-[100px] rounded-full transform scale-125 opacity-60" />
 
-                    {/* Premium Badge */}
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.8, duration: 0.8 }}
-                        className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/40 bg-black/20 px-6 py-2 backdrop-blur-md shadow-[0_0_15px_rgba(212,175,55,0.1)]"
-                    >
-                        <div className="h-1.5 w-1.5 rounded-full bg-[#D4AF37] animate-pulse" />
-                        <span className="text-xs md:text-sm font-medium tracking-[0.2em] uppercase text-[#F4E5B0]">
-                            Vuoden Koru 2026 Finalisti
-                        </span>
-                        <div className="h-1.5 w-1.5 rounded-full bg-[#D4AF37] animate-pulse" />
-                    </motion.div>
-
                     {/* Headline Group */}
-                    <div className="relative mb-8 flex flex-col items-center">
-                        <h1 className="flex flex-col items-center justify-center leading-[0.9] text-white drop-shadow-2xl">
+                    <div className="relative mb-12 flex flex-col items-center">
+                        <h1 className="flex flex-col items-center justify-center text-white drop-shadow-2xl">
                             <span
-                                className="text-6xl md:text-8xl lg:text-9xl uppercase tracking-tighter font-antonio opacity-95"
-                                style={{ fontFamily: 'var(--font-antonio)' }}
+                                className="text-7xl md:text-9xl italic tracking-tight font-serif opacity-95"
+                                style={{ fontFamily: 'var(--font-playfair)' }}
                             >
                                 Täplät
                             </span>
                             <span
-                                className="text-6xl md:text-8xl lg:text-9xl uppercase tracking-tighter font-antonio opacity-95"
-                                style={{ fontFamily: 'var(--font-antonio)' }}
+                                className="text-lg md:text-2xl uppercase tracking-[0.3em] font-light mt-6 text-white/80"
+                                style={{ fontFamily: 'var(--font-inter)' }}
                             >
                                 Korusarja
                             </span>
                         </h1>
-                        <motion.span
+                        <motion.div
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 1.0, duration: 0.8 }}
-                            className="mt-4 text-2xl md:text-4xl font-serif italic text-white/90 tracking-wide"
-                            style={{ fontFamily: 'var(--font-playfair)' }}
+                            className="mt-8 flex items-center gap-4"
                         >
-                            Vuoden Koru 2026 finalisti
-                        </motion.span>
+                            <div className="h-[1px] w-12 bg-white/30" />
+                            <span className="text-sm md:text-base font-medium tracking-widest uppercase text-white/90">
+                                Vuoden Koru 2026 finalisti
+                            </span>
+                            <div className="h-[1px] w-12 bg-white/30" />
+                        </motion.div>
                     </div>
 
                     {/* Ingress */}
@@ -177,17 +166,16 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1.2, duration: 0.8 }}
-                        className="max-w-xl text-center mb-12"
+                        className="max-w-xl text-center mb-16"
                     >
-                        <p className="text-base md:text-lg text-white/80 leading-relaxed font-light tracking-wide">
-                            <span className="block mb-2 font-medium text-white/90 uppercase tracking-widest text-xs">Suomalainen käsityö Reisjärveltä</span>
-                            Näyttävää, ajatonta muotoilua, arkeen ja juhlaan.
+                        <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light font-serif italic" style={{ fontFamily: 'var(--font-playfair)' }}>
+                            &quot;Suomalainen käsityö Reisjärveltä. Näyttävää, ajatonta muotoilua, arkeen ja juhlaan.&quot;
                         </p>
                     </motion.div>
 
                     {/* CTAs */}
                     <motion.div
-                        className="flex flex-col md:flex-row items-center gap-4 md:gap-8 pointer-events-auto"
+                        className="flex flex-col md:flex-row items-center gap-0 md:gap-8 pointer-events-auto"
                         style={{ y: buttonY, scale: buttonScale }}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
