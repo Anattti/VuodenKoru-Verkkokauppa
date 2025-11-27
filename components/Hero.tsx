@@ -114,7 +114,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                     }}
                 >
                     <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" />
-                    <div className="absolute inset-0 bg-black/10" />
+                    <div className="absolute inset-0 bg-black/1" />
                 </motion.div>
             </div>
 
@@ -135,7 +135,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                     <div className="relative mb-12 flex flex-col items-center">
                         <h1 className="flex flex-col items-center justify-center text-white drop-shadow-2xl">
                             <span
-                                className="text-7xl md:text-9xl italic tracking-tight font-serif opacity-95"
+                                className="text-8xl md:text-9xl italic tracking-tight font-serif opacity-95"
                                 style={{ fontFamily: 'var(--font-playfair)' }}
                             >
                                 Täplät
