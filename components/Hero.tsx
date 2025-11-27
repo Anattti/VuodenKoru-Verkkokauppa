@@ -126,22 +126,22 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0.95 }}
                     transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                    className="relative w-full max-w-5xl mx-auto flex flex-col items-center"
+                    className="relative w-full max-w-5xl mx-auto flex flex-col items-center mt-24 md:mt-0"
                 >
                     {/* Darker blur for better text contrast */}
                     <div className="absolute inset-0 -z-10 bg-black/20 blur-[100px] rounded-full transform scale-125 opacity-60" />
 
                     {/* Headline Group */}
-                    <div className="relative mb-12 flex flex-col items-center">
+                    <div className="relative mb-8 md:mb-12 flex flex-col items-center">
                         <h1 className="flex flex-col items-center justify-center text-white drop-shadow-2xl">
                             <span
-                                className="text-8xl md:text-9xl italic tracking-tight font-serif opacity-95"
+                                className="text-7xl md:text-9xl italic tracking-tight font-serif opacity-95"
                                 style={{ fontFamily: 'var(--font-playfair)' }}
                             >
                                 Täplät
                             </span>
                             <span
-                                className="text-lg md:text-2xl uppercase tracking-[0.3em] font-light mt-6 text-white/80"
+                                className="text-sm md:text-2xl uppercase tracking-[0.3em] font-light mt-4 md:mt-6 text-white/80"
                                 style={{ fontFamily: 'var(--font-inter)' }}
                             >
                                 Korusarja
@@ -151,10 +151,10 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 1.0, duration: 0.8 }}
-                            className="mt-8 flex items-center gap-4"
+                            className="mt-6 md:mt-8 flex items-center gap-4"
                         >
                             <div className="h-[1px] w-12 bg-white/30" />
-                            <span className="text-sm md:text-base font-medium tracking-widest uppercase text-white/90">
+                            <span className="text-xs md:text-base font-medium tracking-widest uppercase text-white/90">
                                 Vuoden Koru 2026 finalisti
                             </span>
                             <div className="h-[1px] w-12 bg-white/30" />
@@ -166,9 +166,9 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1.2, duration: 0.8 }}
-                        className="max-w-xl text-center mb-16"
+                        className="max-w-xl text-center mb-10 md:mb-16"
                     >
-                        <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light font-serif italic" style={{ fontFamily: 'var(--font-playfair)' }}>
+                        <p className="text-base md:text-xl text-white/80 leading-relaxed font-light font-serif italic" style={{ fontFamily: 'var(--font-playfair)' }}>
                             &quot;Suomalainen käsityö Reisjärveltä. Näyttävää, ajatonta muotoilua, arkeen ja juhlaan.&quot;
                         </p>
                     </motion.div>
