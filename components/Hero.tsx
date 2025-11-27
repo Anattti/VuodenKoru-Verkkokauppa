@@ -168,7 +168,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                         transition={{ delay: 1.2, duration: 0.8 }}
                         className="max-w-xl text-center mb-10 md:mb-16"
                     >
-                        <p className="text-base md:text-xl text-white/80 leading-relaxed font-light font-serif italic" style={{ fontFamily: 'var(--font-playfair)' }}>
+                        <p className="text-base md:text-xl text-white/90 leading-relaxed font-light font-serif italic" style={{ fontFamily: 'var(--font-playfair)' }}>
                             &quot;Suomalainen käsityö Reisjärveltä. Näyttävää, ajatonta muotoilua, arkeen ja juhlaan.&quot;
                         </p>
                     </motion.div>

@@ -228,7 +228,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
                             src={item.image}
                             alt={item.isHero ? "Hero Background" : "Jewelry"}
                             fill
-                            className={`object-cover ${!item.isHero ? "object-contain opacity-90" : ""}`}
+                            className={`object-cover ${!item.isHero ? "object-contain opacity-90" : "object-[40%_50%] md:object-center"}`}
                             priority={item.isHero}
                         />
                         {item.isHero && (
