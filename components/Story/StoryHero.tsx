@@ -11,6 +11,7 @@ import { useUI } from "@/context/UIContext";
 import { siteConfig } from "@/lib/config";
 import Link from "next/link";
 import TransitionLink from "@/components/TransitionLink";
+import CssGlassButton from "@/components/CssGlassButton";
 
 export default function StoryHero() {
     const { openContact } = useUI();
@@ -61,14 +62,25 @@ export default function StoryHero() {
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 0.2 }}
-                    className="text-center"
+                    className="text-center flex flex-col items-center"
                 >
-                    <h1 className="font-antonio text-6xl md:text-9xl uppercase tracking-tighter mb-4">
+                    <h1 className="text-6xl md:text-9xl italic tracking-tight font-serif opacity-95 mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>
                         Tarina täplien takana
                     </h1>
-                    <p className="font-sans text-lg md:text-xl tracking-[0.2em] uppercase opacity-80 max-w-2xl mx-auto">
+                    <p className="text-lg md:text-xl uppercase tracking-[0.2em] font-light opacity-80 max-w-2xl mx-auto mb-10" style={{ fontFamily: 'var(--font-inter)' }}>
                         Vuoden Koru -kilpailun finalistin tarina
                     </p>
+                    <Link href="https://julesandberyl.fi/vuodenkoru/#aanesta" target="_blank">
+                        <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            <CssGlassButton
+                                text="Äänestä nyt"
+                                className="!px-12 !py-4"
+                            />
+                        </motion.div>
+                    </Link>
                 </motion.div>
 
             </div>

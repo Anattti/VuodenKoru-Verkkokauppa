@@ -8,8 +8,7 @@ import { useState, useEffect, MouseEvent, useRef } from "react";
 
 
 import { useUI } from "@/context/UIContext";
-import { siteConfig, isPreview } from "@/lib/config";
-import { previewHeroImage } from "@/lib/previewImages";
+import { siteConfig } from "@/lib/config";
 
 import Logo from "@/components/Logo";
 import CssGlassButton from "@/components/CssGlassButton";
@@ -96,7 +95,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                     transition={{ duration: 2.5, ease: "easeOut" }}
                 >
                     <Image
-                        src={isPreview ? previewHeroImage : img2323}
+                        src={img2323}
                         alt={`${siteConfig.designerName} Jewelry Background`}
                         fill
                         className="object-cover object-[40%_50%] md:object-center"
@@ -114,7 +113,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                     }}
                 >
                     <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" />
-                    <div className="absolute inset-0 bg-black/1" />
+                    <div className="absolute inset-0 bg-black/20" />
                 </motion.div>
             </div>
 
@@ -182,7 +181,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                         transition={{ duration: 0.6, delay: 1.4, ease: "easeOut" }}
                     >
                         {/* Primary CTA */}
-                        <Link href="https://www.vuodenkoru.fi" target="_blank">
+                        <Link href="https://julesandberyl.fi/vuodenkoru/#aanesta" target="_blank">
                             <motion.div
                                 className="relative flex justify-center"
                                 whileHover={{ scale: 1.02 }}

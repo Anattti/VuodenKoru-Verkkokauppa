@@ -37,30 +37,60 @@ export default function StoryContent() {
             const sections = gsap.utils.toArray<HTMLElement>(".story-section");
             const images = gsap.utils.toArray<HTMLElement>(".story-image");
 
-            // Pin the right side (images)
-            ScrollTrigger.create({
-                trigger: containerRef.current,
-                start: "top top",
-                end: "bottom bottom",
-                pin: imagesRef.current,
-                scrub: true,
+            ScrollTrigger.matchMedia({
+                // Desktop
+                "(min-width: 768px)": function () {
+                    // Pin the right side (images)
+                    ScrollTrigger.create({
+                        trigger: containerRef.current,
+                        start: "top top",
+                        end: "bottom bottom",
+                        pin: imagesRef.current,
+                        scrub: true,
+                    });
+                },
+                // Mobile
+                "(max-width: 767px)": function () {
+                    // No pinning needed as images are fixed
+                }
             });
 
-            // Animate images based on scroll position
-            sections.forEach((section, i) => {
-                ScrollTrigger.create({
-                    trigger: section,
-                    start: "top center",
-                    end: "bottom center",
-                    onEnter: () => {
-                        gsap.to(images, { opacity: 0, duration: 0.5 });
-                        gsap.to(images[i], { opacity: 1, duration: 0.5 });
-                    },
-                    onEnterBack: () => {
-                        gsap.to(images, { opacity: 0, duration: 0.5 });
-                        gsap.to(images[i], { opacity: 1, duration: 0.5 });
-                    }
-                });
+            // Animate images based on scroll position - desktop only
+            ScrollTrigger.matchMedia({
+                // Desktop
+                "(min-width: 768px)": function () {
+                    sections.forEach((section, i) => {
+                        ScrollTrigger.create({
+                            trigger: section,
+                            start: "top center",
+                            end: "bottom center",
+                            onEnter: () => {
+                                gsap.to(images, { opacity: 0, duration: 0.5 });
+                                gsap.to(images[i], { opacity: 1, duration: 0.5 });
+                            },
+                            onEnterBack: () => {
+                                gsap.to(images, { opacity: 0, duration: 0.5 });
+                                gsap.to(images[i], { opacity: 1, duration: 0.5 });
+                            }
+                        });
+                    });
+                },
+                // Mobile
+                "(max-width: 767px)": function () {
+                    const mobileImages = gsap.utils.toArray<HTMLElement>(".mobile-story-image");
+                    mobileImages.forEach((img) => {
+                        gsap.to(img, {
+                            y: "20%", // Move image down
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: img.parentElement, // Trigger based on the container
+                                start: "top bottom", // Start when container enters viewport
+                                end: "bottom top", // End when container leaves viewport
+                                scrub: true,
+                            }
+                        });
+                    });
+                }
             });
 
         }, containerRef);
@@ -72,26 +102,40 @@ export default function StoryContent() {
         <section ref={containerRef} className="relative bg-neutral-900 text-white">
             <div className="flex flex-col md:flex-row">
                 {/* Left Column: Text */}
-                <div className="w-full md:w-1/2 z-10">
+                <div className="w-full md:w-1/2 z-10 relative">
                     {storySections.map((section) => (
                         <div
                             key={section.id}
-                            className="story-section min-h-screen flex flex-col justify-center px-8 md:px-20 py-20"
+                            className="story-section min-h-screen flex flex-col justify-center px-4 md:px-20 py-20"
                         >
-                            <span className="text-sm uppercase tracking-[0.2em] text-neutral-500 mb-4">
-                                0{storySections.indexOf(section) + 1}
-                            </span>
-                            <h2 className="font-antonio text-5xl md:text-7xl mb-8 uppercase text-white">
-                                {section.title}
-                            </h2>
-                            <p className="font-sans text-lg md:text-xl leading-relaxed text-neutral-400 max-w-md">
-                                {section.text}
-                            </p>
+                            {/* Mobile Image */}
+                            <div className="md:hidden w-full aspect-[4/5] relative mb-8 rounded-lg overflow-hidden">
+                                <div className="absolute inset-0 h-[120%] -top-[10%] mobile-story-image">
+                                    <Image
+                                        src={section.image}
+                                        alt={section.title}
+                                        fill
+                                        className="object-cover"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="md:p-0">
+                                <span className="text-sm uppercase tracking-[0.2em] text-neutral-500 mb-4 block">
+                                    0{storySections.indexOf(section) + 1}
+                                </span>
+                                <h2 className="font-antonio text-5xl md:text-7xl mb-8 uppercase text-white">
+                                    {section.title}
+                                </h2>
+                                <p className="font-sans text-lg md:text-xl leading-relaxed text-neutral-400 max-w-md">
+                                    {section.text}
+                                </p>
+                            </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Right Column: Sticky Images */}
+                {/* Right Column: Sticky Images (Desktop Only) */}
                 <div
                     ref={imagesRef}
                     className="hidden md:block w-1/2 h-screen sticky top-0 overflow-hidden"

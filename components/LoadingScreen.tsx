@@ -22,10 +22,8 @@ import img2324 from "@/assets/images/IMG_2324.webp";
 import img2325 from "@/assets/images/IMG_2325.webp";
 import img2326 from "@/assets/images/IMG_2326.webp";
 
-import { isPreview } from "@/lib/config";
-import { previewImages, previewHeroImage } from "@/lib/previewImages";
 
-const RANDOM_IMAGES = isPreview ? previewImages.map(img => img.src) : [
+const RANDOM_IMAGES = [
     img2312, img2313, img2314, img2317, img2318,
     img2315, img2316, img2320, img2319, img2322,
     img2321, img2324, img2325, img2326
@@ -78,10 +76,10 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
         }
 
         // Hero Image
-        const heroDelay = 3.5;
+        const heroDelay = 5.5;
         generatedItems.push({
             id: 'hero',
-            image: isPreview ? previewHeroImage : img2323,
+            image: img2323,
             left: '50%',
             delay: heroDelay,
             duration: 4.5,
