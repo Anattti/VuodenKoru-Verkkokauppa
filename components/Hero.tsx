@@ -96,7 +96,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                 >
                     <Image
                         src={img2323}
-                        alt={`${siteConfig.designerName} Jewelry Background`}
+                        alt={`${siteConfig.designerName} Vuoden Koru 2026 - Täplät-korusarja`}
                         fill
                         className="object-cover object-[40%_50%] md:object-center"
                         priority

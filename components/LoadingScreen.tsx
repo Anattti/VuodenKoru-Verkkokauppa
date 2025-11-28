@@ -76,7 +76,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
         }
 
         // Hero Image
-        const heroDelay = 5.5;
+        const heroDelay = 3.5;
         generatedItems.push({
             id: 'hero',
             image: img2323,
