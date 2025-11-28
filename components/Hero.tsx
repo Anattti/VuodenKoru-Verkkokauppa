@@ -27,6 +27,16 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
     const [isHovering, setIsHovering] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
 
     // Smooth spring animation for the spotlight
     const springConfig = { damping: 20, stiffness: 100, mass: 0.5 }; // Softer spring for ambient feel
@@ -35,7 +45,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
 
     // Ambient animation loop
     useEffect(() => {
-        if (isHovering) return;
+        if (isHovering || isMobile) return;
 
         let animationFrameId: number;
         let startTime = Date.now();
@@ -63,12 +73,13 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
         return () => {
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
         };
-    }, [isHovering, mouseX, mouseY]);
+    }, [isHovering, mouseX, mouseY, isMobile]);
 
     // Create the mask image template
     const maskImage = useMotionTemplate`radial-gradient(circle 350px at ${smoothX}px ${smoothY}px, transparent 0%, rgba(0, 0, 0, 0.5) 50%, black 100%)`;
 
     const handleMouseMove = (e: MouseEvent<HTMLElement>) => {
+        if (isMobile) return;
         setIsHovering(true);
         const { clientX, clientY } = e;
         const { left, top } = e.currentTarget.getBoundingClientRect();
@@ -106,11 +117,11 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                 {/* Gradient Overlay with Spotlight Effect */}
                 <motion.div
                     className="absolute inset-0 z-[999] pointer-events-none"
-                    style={{
+                    style={!isMobile ? {
                         maskImage,
                         WebkitMaskImage: maskImage,
                         willChange: "mask-image",
-                    }}
+                    } : undefined}
                 >
                     <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" />
                     <div className="absolute inset-0 bg-black/20" />
@@ -175,7 +186,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                     {/* CTAs */}
                     <motion.div
                         className="flex flex-col md:flex-row items-center gap-0 md:gap-8 pointer-events-auto"
-                        style={{ y: buttonY, scale: buttonScale }}
+                        style={isMobile ? {} : { y: buttonY, scale: buttonScale }}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
                         transition={{ duration: 0.6, delay: 1.4, ease: "easeOut" }}
