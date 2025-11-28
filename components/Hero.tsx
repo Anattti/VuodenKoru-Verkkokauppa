@@ -99,21 +99,34 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
         >
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
-                <motion.div
-                    className="relative w-full h-full"
-                    initial={{ scale: 1 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 2.5, ease: "easeOut" }}
-                >
-                    <Image
-                        src={img2323}
-                        alt={`${siteConfig.designerName} Vuoden Koru 2026 - Täplät-korusarja`}
-                        fill
-                        className="object-cover object-[40%_50%] md:object-center"
-                        priority
-                        quality={100}
-                    />
-                </motion.div>
+                {isMobile ? (
+                    <div className="relative w-full h-full">
+                        <Image
+                            src={img2323}
+                            alt={`${siteConfig.designerName} Vuoden Koru 2026 - Täplät-korusarja`}
+                            fill
+                            className="object-cover object-[40%_50%]"
+                            priority
+                            quality={100}
+                        />
+                    </div>
+                ) : (
+                    <motion.div
+                        className="relative w-full h-full"
+                        initial={{ scale: 1 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 2.5, ease: "easeOut" }}
+                    >
+                        <Image
+                            src={img2323}
+                            alt={`${siteConfig.designerName} Vuoden Koru 2026 - Täplät-korusarja`}
+                            fill
+                            className="object-cover md:object-center"
+                            priority
+                            quality={100}
+                        />
+                    </motion.div>
+                )}
                 {/* Gradient Overlay with Spotlight Effect */}
                 <motion.div
                     className="absolute inset-0 z-[999] pointer-events-none"
@@ -133,13 +146,13 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
             {/* Center Content */}
             <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center pb-12 md:pb-0">
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0.95 }}
-                    transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                    initial={isMobile ? { opacity: 0 } : { opacity: 0, scale: 0.95 }}
+                    animate={isLoaded ? (isMobile ? { opacity: 1 } : { opacity: 1, scale: 1 }) : (isMobile ? { opacity: 0 } : { opacity: 0, scale: 0.95 })}
+                    transition={{ duration: isMobile ? 0.8 : 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
                     className="relative w-full max-w-5xl mx-auto flex flex-col items-center mt-24 md:mt-0"
                 >
-                    {/* Darker blur for better text contrast */}
-                    <div className="absolute inset-0 -z-10 bg-black/20 blur-[100px] rounded-full transform scale-125 opacity-60" />
+                    {/* Darker blur for better text contrast - desktop only */}
+                    {!isMobile && <div className="absolute inset-0 -z-10 bg-black/20 blur-[100px] rounded-full transform scale-125 opacity-60" />}
 
                     {/* Headline Group */}
                     <div className="relative mb-8 md:mb-12 flex flex-col items-center">
