@@ -9,6 +9,8 @@ import BusinessCard from "@/components/BusinessCard";
 import PageTransition from "@/components/PageTransition";
 import { siteConfig } from "@/lib/config";
 
+const ogImage = "https://www.helilampi.fi/images/hero-jewelry.jpg";
+
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
@@ -48,6 +50,10 @@ export const metadata: Metadata = {
   keywords: ["Vuoden Koru", "Heli Lampi", "Korumuotoilu", "Finnish Design", "Jewelry Design", "Finalisti 2026 -finalisti, kultaseppä"],
   authors: [{ name: siteConfig.designerName, url: "https://www.helilampi.fi" }],
   creator: siteConfig.designerName,
+  alternates: {
+    canonical: "https://www.helilampi.fi",
+  },
+  applicationName: siteConfig.brandName,
   openGraph: {
     type: "website",
     locale: "fi_FI",
@@ -57,7 +63,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.brandName,
     images: [
       {
-        url: "/images/hero-jewelry.jpg", // Ensure this image exists in public folder
+        url: ogImage,
         width: 1200,
         height: 630,
         alt: siteConfig.metaTitle,
@@ -68,7 +74,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.metaTitle,
     description: siteConfig.metaDescription,
-    images: ["/images/hero-jewelry.jpg"], // Ensure this image exists in public folder
+    images: [ogImage],
     creator: siteConfig.instagramHandle,
   },
   robots: {
