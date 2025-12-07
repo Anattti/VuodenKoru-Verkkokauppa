@@ -113,7 +113,7 @@ export default function StoryContent() {
                                 <div className="absolute inset-0 h-[120%] -top-[10%] mobile-story-image">
                                     <Image
                                         src={section.image}
-                                        alt={section.title}
+                                        alt={`${section.title} – Täplät-korusarja`}
                                         fill
                                         className="object-cover"
                                     />
@@ -147,7 +147,7 @@ export default function StoryContent() {
                         >
                             <Image
                                 src={section.image}
-                                alt={section.title}
+                                alt={`${section.title} – Täplät-korusarja`}
                                 fill
                                 className="object-cover"
                                 priority={i === 0}

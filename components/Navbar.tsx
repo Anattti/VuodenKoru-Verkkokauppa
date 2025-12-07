@@ -41,7 +41,7 @@ export default function Navbar() {
                         </TransitionLink>
                     </div>
                 )}
-                <div className="hidden md:block"><TransitionLink href="/tarina"><AnimatedText text="Tarina" /></TransitionLink></div>
+                <div className="hidden md:block"><TransitionLink href="/tarina-taplat-korusarja"><AnimatedText text="Tarina" /></TransitionLink></div>
                 <div className="hidden md:block" onClick={openContact}><AnimatedText text="Ota Yhteyttä" /></div>
 
                 <button onClick={() => setIsMenuOpen(true)} className="md:hidden text-inherit">

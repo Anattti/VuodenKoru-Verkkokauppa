@@ -131,7 +131,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                         </motion.div>
 
                         <motion.div custom={2} variants={linkVariants} style={{ willChange: "transform, opacity" }}>
-                            <TransitionLink href="/tarina" onClick={handleLinkClick} className="hover:text-white/70 transition-colors">
+                            <TransitionLink href="/tarina-taplat-korusarja" onClick={handleLinkClick} className="hover:text-white/70 transition-colors">
                                 Tarina
                             </TransitionLink>
                         </motion.div>

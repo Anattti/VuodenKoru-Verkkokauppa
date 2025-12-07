@@ -47,7 +47,14 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.brandName}`,
   },
   description: siteConfig.metaDescription,
-  keywords: ["Vuoden Koru", "Heli Lampi", "Korumuotoilu", "Finnish Design", "Jewelry Design", "Finalisti 2026 -finalisti, kultaseppä"],
+  keywords: [
+    "Vuoden Koru 2026",
+    "Heli Lampi",
+    "korumuotoilu",
+    "Finnish design",
+    "jewelry design",
+    "kultaseppä",
+  ],
   authors: [{ name: siteConfig.designerName, url: "https://www.helilampi.fi" }],
   creator: siteConfig.designerName,
   alternates: {

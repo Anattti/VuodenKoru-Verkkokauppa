@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://www.helilampi.fi' // Replace with your actual domain
+    const baseUrl = 'https://www.helilampi.fi';
 
     return [
         {
@@ -10,6 +10,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly',
             priority: 1,
         },
-        // Add other routes here if you have them, e.g., /about, /contact
+        {
+            url: `${baseUrl}/tarina-taplat-korusarja`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
     ]
 }

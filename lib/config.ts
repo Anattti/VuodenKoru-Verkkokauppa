@@ -14,7 +14,7 @@ export const siteConfig = {
     profession: "Jalometallialan artesaani | Kultaseppäopiskelija",
     slogan: "Muotoilu, joka puhuttelee. Käsityö, joka kestää.",
     description: "Täplät-korusarja on valittu Vuoden Koru 2026 -finalistiksi. Vuoden Koru -finaalipaikka on osoitus tinkimättömästä laadusta ja taiteellisesta näkemyksestä.",
-    metaTitle: "Heli Lampi | Vuoden Koru 2026 Finalisti",
+    metaTitle: "Heli Lampi | Vuoden Koru 2026 Finalisti | Täplät-korusarja",
     metaDescription: "Tutustu Heli Lammen Vuoden Koru 2026 -finaalikoruun. Uniikkia suomalaista korumuotoilua.",
     footerBrand: "HL Korut",
     footerDesigner: "Heli Lampi Design",

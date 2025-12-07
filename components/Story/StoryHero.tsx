@@ -33,7 +33,7 @@ export default function StoryHero() {
             >
                 <Image
                     src="/images/TuoteKuvat/StorySectionHero2.webp"
-                    alt="Story Hero Background"
+                    alt="Täplät-korusarjan hero-kuva"
                     fill
                     className="object-cover"
                     priority
@@ -53,7 +53,7 @@ export default function StoryHero() {
                     <Logo />
                 </TransitionLink>
                 <div className="hidden md:block"><TransitionLink href="/"><AnimatedText text="Kokoelma" /></TransitionLink></div>
-                <div className="hidden md:block"><Link href="/tarina"><AnimatedText text="Tarina" /></Link></div>
+                <div className="hidden md:block"><Link href="/tarina-taplat-korusarja"><AnimatedText text="Tarina" /></Link></div>
                 <div onClick={openContact}><AnimatedText text="Ota Yhteyttä" /></div>
             </motion.div> */}
 
