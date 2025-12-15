@@ -79,7 +79,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
         const heroDelay = 3.5;
         generatedItems.push({
             id: 'hero',
-            image: img2323,
+            image: img2320,
             left: '50%',
             delay: heroDelay,
             duration: 4.5,
@@ -226,7 +226,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
                             src={item.image}
                             alt={item.isHero ? "Hero Background" : "Jewelry"}
                             fill
-                            className={`object-cover ${!item.isHero ? "object-contain opacity-90" : "object-[40%_50%] md:object-center"}`}
+                            className={`object-cover ${!item.isHero ? "object-contain opacity-90" : "object-[70%_50%] md:object-center"}`}
                             priority={item.isHero}
                         />
                         {item.isHero && (
