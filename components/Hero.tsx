@@ -25,6 +25,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
 
     // Fade effects for hero content
     const contentOpacity = useTransform(scrollY, [0, 500], [1, 0]);
+    const buttonOpacity = useTransform(scrollY, [150, 400], [1, 0]); // Delayed fade for buttons to preserve blur
     const overlayOpacity = useTransform(scrollY, [0, 500], [1, 0]);
 
     // Mouse position for spotlight effect
@@ -152,10 +153,7 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
 
 
                 {/* Center Content */}
-                <motion.div
-                    className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center pb-12 md:pb-0"
-                    style={{ opacity: contentOpacity }}
-                >
+                <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center pb-12 md:pb-0">
                     <motion.div
                         initial={isMobile ? { opacity: 0 } : { opacity: 0, scale: 0.95 }}
                         animate={isLoaded ? (isMobile ? { opacity: 1 } : { opacity: 1, scale: 1 }) : (isMobile ? { opacity: 0 } : { opacity: 0, scale: 0.95 })}
@@ -163,10 +161,18 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                         className="relative w-full max-w-5xl mx-auto flex flex-col items-center mt-24 md:mt-0"
                     >
                         {/* Darker blur for better text contrast - desktop only */}
-                        {!isMobile && <div className="absolute inset-0 -z-10 bg-black/20 blur-[100px] rounded-full transform scale-125 opacity-60" />}
+                        {!isMobile && (
+                            <motion.div
+                                className="absolute inset-0 -z-10 bg-black/20 blur-[100px] rounded-full transform scale-125 opacity-60"
+                                style={{ opacity: contentOpacity }}
+                            />
+                        )}
 
                         {/* Headline Group */}
-                        <div className="relative mb-8 md:mb-12 flex flex-col items-center">
+                        <motion.div
+                            className="relative mb-8 md:mb-12 flex flex-col items-center"
+                            style={{ opacity: contentOpacity }}
+                        >
                             <h1 className="flex flex-col items-center justify-center text-white drop-shadow-2xl">
                                 <span
                                     className="text-7xl md:text-9xl italic tracking-tight font-serif opacity-95"
@@ -193,60 +199,68 @@ export default function Hero({ isLoaded = true }: { isLoaded?: boolean }) {
                                 </span>
                                 <div className="h-[1px] w-12 bg-white/30" />
                             </motion.div>
-                        </div>
+                        </motion.div>
 
                         {/* Ingress */}
                         <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 1.2, duration: 0.8 }}
+                            style={{ opacity: contentOpacity }}
                             className="max-w-xl text-center mb-10 md:mb-16"
                         >
-                            <p className="text-base md:text-xl text-white/90 leading-relaxed font-light font-serif italic" style={{ fontFamily: 'var(--font-playfair)' }}>
-                                &quot;Suomalainen käsityö Reisjärveltä. Näyttävää, ajatonta muotoilua, arkeen ja juhlaan.&quot;
-                            </p>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 1.2, duration: 0.8 }}
+                            >
+                                <p className="text-base md:text-xl text-white/90 leading-relaxed font-light font-serif italic" style={{ fontFamily: 'var(--font-playfair)' }}>
+                                    &quot;Suomalainen käsityö Reisjärveltä. Näyttävää, ajatonta muotoilua, arkeen ja juhlaan.&quot;
+                                </p>
+                            </motion.div>
                         </motion.div>
 
                         {/* CTAs */}
                         <motion.div
-                            className="flex flex-col md:flex-row items-center gap-0 md:gap-8 pointer-events-auto"
-                            style={isMobile ? {} : { y: buttonY, scale: buttonScale }}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-                            transition={{ duration: 0.6, delay: 1.4, ease: "easeOut" }}
+                            className="relative z-20 pointer-events-auto"
+                            style={isMobile ? {} : { y: buttonY, scale: buttonScale, opacity: buttonOpacity }}
                         >
-                            {/* Primary CTA */}
-                            <Link href="https://julesandberyl.fi/vuodenkoru/#aanesta" target="_blank">
+                            <motion.div
+                                className="flex flex-col md:flex-row items-center gap-0 md:gap-8"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+                                transition={{ duration: 0.6, delay: 1.4, ease: "easeOut" }}
+                            >
+                                {/* Primary CTA */}
+                                <Link href="https://julesandberyl.fi/vuodenkoru/#aanesta" target="_blank">
+                                    <motion.div
+                                        className="relative flex justify-center"
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                    >
+                                        <CssGlassButton
+                                            text="Äänestä nyt"
+                                            className="!px-12 !py-4"
+                                        />
+                                    </motion.div>
+                                </Link>
+
+                                {/* Secondary CTA */}
                                 <motion.div
                                     className="relative flex justify-center"
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                 >
                                     <CssGlassButton
-                                        text="Äänestä nyt"
+                                        text="Katso kokoelma"
                                         className="!px-12 !py-4"
+                                        onClick={() => {
+                                            const gallery = document.getElementById('gallery');
+                                            gallery?.scrollIntoView({ behavior: 'smooth' });
+                                        }}
                                     />
                                 </motion.div>
-                            </Link>
-
-                            {/* Secondary CTA */}
-                            <motion.div
-                                className="relative flex justify-center"
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                            >
-                                <CssGlassButton
-                                    text="Katso kokoelma"
-                                    className="!px-12 !py-4"
-                                    onClick={() => {
-                                        const gallery = document.getElementById('gallery');
-                                        gallery?.scrollIntoView({ behavior: 'smooth' });
-                                    }}
-                                />
                             </motion.div>
                         </motion.div>
                     </motion.div>
-                </motion.div>
+                </div>
 
                 {/* Bottom Info */}
                 <motion.div
