@@ -1,6 +1,6 @@
 import { getSession } from './auth';
 
-const DOMAIN = process.env.SHOPIFY_STORE_DOMAIN || 'hl-korut-testi.myshopify.com';
+const SHOP_ID = process.env.SHOPIFY_CUSTOMER_ACCOUNT_SHOP_ID;
 const API_VERSION = '2024-10';
 
 export interface CustomerProfile {
@@ -51,11 +51,11 @@ async function customerAccountFetch<T>({
     throw new Error('Customer is not authenticated');
   }
 
-  if (!DOMAIN) {
-    throw new Error('Missing SHOPIFY_STORE_DOMAIN');
+  if (!SHOP_ID) {
+    throw new Error('Missing SHOPIFY_CUSTOMER_ACCOUNT_SHOP_ID');
   }
 
-  const endpoint = `https://${DOMAIN}/account/customer/api/${API_VERSION}/graphql`;
+  const endpoint = `https://shopify.com/authentication/${SHOP_ID}/account/api/${API_VERSION}/graphql.json`;
 
   const response = await fetch(endpoint, {
     method: 'POST',
