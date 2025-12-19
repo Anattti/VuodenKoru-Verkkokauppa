@@ -1,0 +1,111 @@
+/* Main container for the glass effect - handles the liquid distortion */
+.glassContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Adjust size as needed, using fit-content or fixed size based on button */
+    width: auto;
+    height: auto;
+    border-radius: 30px;
+    padding: 10px;
+    /* Add some padding so the liquid effect has space around the button */
+}
+
+.glassContainer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    border-radius: 30px;
+    box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+}
+
+.glassContainer::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: 30px;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    filter: url(#container-glass);
+    -webkit-filter: url(#container-glass);
+    overflow: hidden;
+    isolation: isolate;
+    background: white;
+    /* Fallback/Base mostly invisible due to blend but needed for filter to catch something? */
+    opacity: 0;
+    /* The filter usually works on the backdrop or content. Tweak if invisible. */
+}
+
+/* Actually, for turbulence to be visible, it might need base content or background color to distort if it's not displacing backdrop */
+
+/* Revert to original approach: container has the filter */
+.glassContainer::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: 30px;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    filter: url(#container-glass);
+    -webkit-filter: url(#container-glass);
+    overflow: hidden;
+    isolation: isolate;
+    /* User said "Button background but not background image". 
+       The container IS the background of the button in a way. 
+       Let's ensure it has some visibility */
+    background: rgba(255, 255, 255, 0.05);
+    opacity: 1;
+}
+
+
+.glassBtn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 150px;
+    height: 70px;
+    padding: 15px;
+    background: transparent;
+    border-radius: 9999px;
+    outline: none;
+    border: none;
+    z-index: 0;
+}
+
+.glassBtn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    border-radius: 9999px;
+    box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.glassBtn::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: 9999px;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    filter: url(#btn-glass);
+    -webkit-filter: url(#btn-glass);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.glassBtn svg {
+    width: 100%;
+    height: 100%;
+    stroke: #fff;
+}

@@ -5,9 +5,12 @@ import "./globals.css";
 
 import SmoothScroll from "@/components/SmoothScroll";
 import { UIProvider } from "@/context/UIContext";
+import { CartProvider } from "@/context/CartContext";
 import BusinessCard from "@/components/BusinessCard";
+import CartDrawer from "@/components/shop/CartDrawer";
 import PageTransition from "@/components/PageTransition";
 import { siteConfig } from "@/lib/config";
+import ServiceWorkerKiller from "@/components/ServiceWorkerKiller";
 
 const ogImage = "https://www.helilampi.fi/images/hero-jewelry.jpg";
 
@@ -121,11 +124,15 @@ export default function RootLayout({
         className={`${playfair.variable} ${inter.variable} ${antonio.variable} ${oranienbaum.variable} ${prostoOne.variable} font-sans antialiased bg-zinc-50 text-zinc-900`}
       >
         <UIProvider>
-          <JsonLd />
-          <PageTransition />
-          <BusinessCard />
-          <SmoothScroll>{children}</SmoothScroll>
-          <Analytics />
+          <CartProvider>
+            <JsonLd />
+            <PageTransition />
+            <BusinessCard />
+            <CartDrawer />
+            <ServiceWorkerKiller />
+            <SmoothScroll>{children}</SmoothScroll>
+            <Analytics />
+          </CartProvider>
         </UIProvider>
       </body>
     </html>
