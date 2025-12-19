@@ -6,7 +6,7 @@ const CUSTOMER_SESSION_COOKIE = 'shopify_customer_session';
 
 const CLIENT_ID = process.env.SHOPIFY_CUSTOMER_ACCOUNT_CLIENT_ID;
 const SHOP_ID = process.env.SHOPIFY_CUSTOMER_ACCOUNT_SHOP_ID;
-const REDIRECT_URI = process.env.SHOPIFY_CUSTOMER_ACCOUNT_REDIRECT_URI || 'http://localhost:3000/api/auth/callback';
+const REDIRECT_URI = process.env.SHOPIFY_CUSTOMER_ACCOUNT_REDIRECT_URI || 'https://vuoden-koru-verkkokauppa.vercel.app/api/auth/callback';
 
 export interface Session {
     accessToken: string;
@@ -40,7 +40,7 @@ export async function getLoginUrl() {
     const codeVerifier = generateCodeVerifier();
     const codeChallenge = await generateCodeChallenge(codeVerifier);
 
-    const url = new URL(`https://shopify.com/authentication/${SHOP_ID}/oauth/authorize`);
+    const url = new URL(`https://hl-korut-testi.myshopify.com/auth/oauth/authorize`);
     url.searchParams.append('client_id', CLIENT_ID);
     url.searchParams.append('scope', 'openid email https://shopify.com/customer-account-api/customer.graphql');
     url.searchParams.append('redirect_uri', REDIRECT_URI);
@@ -86,7 +86,7 @@ export async function handleCallback(code: string, state: string) {
         code_verifier: codeVerifier,
     });
 
-    const response = await fetch(`https://shopify.com/authentication/${SHOP_ID}/oauth/token`, {
+    const response = await fetch(`https://hl-korut-testi.myshopify.com/auth/oauth/token`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
