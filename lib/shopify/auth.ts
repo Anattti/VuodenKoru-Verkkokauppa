@@ -43,14 +43,9 @@ export async function getLoginUrl() {
     const codeVerifier = generateCodeVerifier();
     const codeChallenge = await generateCodeChallenge(codeVerifier);
 
-    // Using the modern Shopify Customer Account API authorization URL
-    // If SHOP_ID is available (gid format), we can use shopify.com/<shop_id>
-    // Otherwise fallback to the store domain
-    const authBase = SHOP_ID ? `https://shopify.com/${SHOP_ID.replace('gid://shopify/Shop/', '')}` : `https://${DOMAIN}`;
-    const url = new URL(`${authBase}/auth/oauth/authorize`);
-
+    const url = new URL(`https://${DOMAIN}/auth/oauth/authorize`);
     url.searchParams.append('client_id', CLIENT_ID);
-    url.searchParams.append('scope', 'openid email');
+    url.searchParams.append('scope', 'openid email https://shopify.com/customer-account-api/customer.graphql');
     url.searchParams.append('redirect_uri', REDIRECT_URI);
     url.searchParams.append('response_type', 'code');
     url.searchParams.append('state', state);
@@ -74,13 +69,7 @@ export async function handleCallback(code: string, state: string) {
     const savedState = cookieStore.get('shopify_auth_state')?.value;
     const codeVerifier = cookieStore.get('shopify_auth_code_verifier')?.value;
 
-    console.log('--- Handle Callback Debug ---');
-    console.log('Received State:', state);
-    console.log('Saved State:', savedState);
-    console.log('Has Code Verifier:', !!codeVerifier);
-
     if (!savedState || savedState !== state) {
-        console.error('State mismatch!');
         throw new Error('Invalid auth state');
     }
 
@@ -100,8 +89,7 @@ export async function handleCallback(code: string, state: string) {
         code_verifier: codeVerifier,
     });
 
-    const tokenBase = SHOP_ID ? `https://shopify.com/${SHOP_ID.replace('gid://shopify/Shop/', '')}` : `https://${DOMAIN}`;
-    const response = await fetch(`${tokenBase}/auth/oauth/token`, {
+    const response = await fetch(`https://${DOMAIN}/auth/oauth/token`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -110,14 +98,12 @@ export async function handleCallback(code: string, state: string) {
     });
 
     if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Token exchange failed:', errorText);
-        console.error('Status:', response.status);
-        throw new Error(`Failed to exchange code for token: ${errorText}`);
+        const error = await response.text();
+        console.error('Token exchange failed:', error);
+        throw new Error('Failed to exchange code for token');
     }
 
     const data = await response.json();
-    console.log('Token data received successfully');
 
     const expiresAt = new Date(Date.now() + data.expires_in * 1000).toISOString();
 
@@ -181,8 +167,7 @@ export async function logout() {
     cookieStore.delete(CUSTOMER_SESSION_COOKIE);
 
     if (SHOP_ID && CLIENT_ID) {
-        const logoutBase = SHOP_ID ? `https://shopify.com/${SHOP_ID.replace('gid://shopify/Shop/', '')}` : `https://${DOMAIN}`;
-        const logoutUrl = `${logoutBase}/auth/logout?client_id=${CLIENT_ID}&post_logout_redirect_uri=${encodeURIComponent(APP_URL)}`;
+        const logoutUrl = `https://${DOMAIN}/auth/logout?client_id=${CLIENT_ID}&post_logout_redirect_uri=${encodeURIComponent(APP_URL)}`;
         redirect(logoutUrl);
     } else {
         redirect('/');

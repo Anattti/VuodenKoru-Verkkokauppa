@@ -19,7 +19,6 @@ export async function GET(request: NextRequest) {
     } catch (error: any) {
         console.error('Auth callback error:', error);
         const origin = request.nextUrl.origin;
-        const errorMessage = encodeURIComponent(error.message || 'auth_failed');
-        return NextResponse.redirect(`${origin}/account/login?error=${errorMessage}`);
+        return NextResponse.redirect(`${origin}/account/login?error=auth_failed`);
     }
 }
