@@ -4,9 +4,12 @@ import * as crypto from 'node:crypto';
 
 const CUSTOMER_SESSION_COOKIE = 'shopify_customer_session';
 
+// Environment variables with fallbacks for development convenience
 const CLIENT_ID = process.env.SHOPIFY_CUSTOMER_ACCOUNT_CLIENT_ID;
 const SHOP_ID = process.env.SHOPIFY_CUSTOMER_ACCOUNT_SHOP_ID;
-const REDIRECT_URI = process.env.SHOPIFY_CUSTOMER_ACCOUNT_REDIRECT_URI || 'https://vuoden-koru-verkkokauppa.vercel.app/api/auth/callback';
+const DOMAIN = process.env.SHOPIFY_STORE_DOMAIN || 'hl-korut-testi.myshopify.com';
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://vuoden-koru-verkkokauppa.vercel.app';
+const REDIRECT_URI = `${APP_URL}/api/auth/callback`;
 
 export interface Session {
     accessToken: string;
@@ -31,8 +34,8 @@ async function generateCodeChallenge(codeVerifier: string) {
  * Generates the Shopify Customer Account login URL data including PKCE params.
  */
 export async function getLoginUrl() {
-    if (!CLIENT_ID || !SHOP_ID) {
-        throw new Error('Missing SHOPIFY_CUSTOMER_ACCOUNT_CLIENT_ID or SHOPIFY_CUSTOMER_ACCOUNT_SHOP_ID');
+    if (!CLIENT_ID) {
+        throw new Error('Missing SHOPIFY_CUSTOMER_ACCOUNT_CLIENT_ID');
     }
 
     const state = Buffer.from(crypto.randomBytes(16)).toString('hex');
@@ -40,7 +43,7 @@ export async function getLoginUrl() {
     const codeVerifier = generateCodeVerifier();
     const codeChallenge = await generateCodeChallenge(codeVerifier);
 
-    const url = new URL(`https://hl-korut-testi.myshopify.com/auth/oauth/authorize`);
+    const url = new URL(`https://${DOMAIN}/auth/oauth/authorize`);
     url.searchParams.append('client_id', CLIENT_ID);
     url.searchParams.append('scope', 'openid email https://shopify.com/customer-account-api/customer.graphql');
     url.searchParams.append('redirect_uri', REDIRECT_URI);
@@ -74,7 +77,7 @@ export async function handleCallback(code: string, state: string) {
         throw new Error('Missing code verifier');
     }
 
-    if (!CLIENT_ID || !SHOP_ID) {
+    if (!CLIENT_ID) {
         throw new Error('Missing Shopify environment variables');
     }
 
@@ -86,7 +89,7 @@ export async function handleCallback(code: string, state: string) {
         code_verifier: codeVerifier,
     });
 
-    const response = await fetch(`https://hl-korut-testi.myshopify.com/auth/oauth/token`, {
+    const response = await fetch(`https://${DOMAIN}/auth/oauth/token`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -164,7 +167,7 @@ export async function logout() {
     cookieStore.delete(CUSTOMER_SESSION_COOKIE);
 
     if (SHOP_ID && CLIENT_ID) {
-        const logoutUrl = `https://shopify.com/authentication/${SHOP_ID}/logout?client_id=${CLIENT_ID}&post_logout_redirect_uri=${encodeURIComponent(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000')}`;
+        const logoutUrl = `https://${DOMAIN}/auth/logout?client_id=${CLIENT_ID}&post_logout_redirect_uri=${encodeURIComponent(APP_URL)}`;
         redirect(logoutUrl);
     } else {
         redirect('/');
