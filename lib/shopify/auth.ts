@@ -42,7 +42,7 @@ export async function getLoginUrl() {
 
     const url = new URL(`https://shopify.com/authentication/${SHOP_ID}/oauth/authorize`);
     url.searchParams.append('client_id', CLIENT_ID);
-    url.searchParams.append('scope', 'openid email https://api.customers.com/auth/customer.graphql');
+    url.searchParams.append('scope', 'openid email https://shopify.com/customer-account-api/customer.graphql');
     url.searchParams.append('redirect_uri', REDIRECT_URI);
     url.searchParams.append('response_type', 'code');
     url.searchParams.append('state', state);
