@@ -40,19 +40,25 @@ export default function ProductGallery({ media }: ProductGalleryProps) {
             <div className="hidden lg:flex flex-col gap-4 w-24 flex-shrink-0">
                 {media.map((item, idx) => (
                     <button
-                        key={item.id}
+                        key={`${item.id}-${idx}`}
                         onClick={() => setCurrentImageIndex(idx)}
                         className={`relative aspect-square w-full border transition-all overflow-hidden bg-zinc-50 ${idx === currentImageIndex
                             ? 'border-zinc-900 opacity-100'
                             : 'border-transparent opacity-60 hover:opacity-100'
                             }`}
                     >
-                        <Image
-                            src={item.previewImage?.url || item.image?.url || ''}
-                            alt={item.alt || item.previewImage?.altText || `Product thumbnail ${idx + 1}`}
-                            fill
-                            className="object-cover"
-                        />
+                        {item.previewImage?.url || item.image?.url ? (
+                            <Image
+                                src={item.previewImage?.url || item.image?.url || ''}
+                                alt={item.alt || item.previewImage?.altText || `Product thumbnail ${idx + 1}`}
+                                fill
+                                className="object-cover"
+                            />
+                        ) : (
+                            <div className="absolute inset-0 flex items-center justify-center bg-zinc-100 text-[10px] text-zinc-400">
+                                Ei kuvaa
+                            </div>
+                        )}
                         {item.mediaContentType === 'MODEL_3D' && (
                             <div className="absolute inset-0 flex items-center justify-center bg-black/10">
                                 <Box size={20} className="text-white drop-shadow-md" />
@@ -74,13 +80,19 @@ export default function ProductGallery({ media }: ProductGalleryProps) {
                     </div>
                 ) : (
                     <div className="relative w-full h-full cursor-zoom-in" onClick={() => setIsLightboxOpen(true)}>
-                        <Image
-                            src={currentMedia.image?.url || currentMedia.previewImage?.url || ''}
-                            alt={currentMedia.alt || currentMedia.previewImage?.altText || 'Product image'}
-                            fill
-                            className="object-cover transition-transform duration-500 hover:scale-105"
-                            priority
-                        />
+                        {currentMedia.image?.url || currentMedia.previewImage?.url ? (
+                            <Image
+                                src={currentMedia.image?.url || currentMedia.previewImage?.url || ''}
+                                alt={currentMedia.alt || currentMedia.previewImage?.altText || 'Product image'}
+                                fill
+                                className="object-cover transition-transform duration-500 hover:scale-105"
+                                priority
+                            />
+                        ) : (
+                            <div className="absolute inset-0 flex items-center justify-center bg-zinc-100 text-zinc-400">
+                                Ei kuvaa
+                            </div>
+                        )}
                     </div>
                 )}
 
@@ -134,13 +146,17 @@ export default function ProductGallery({ media }: ProductGalleryProps) {
                         </button>
 
                         <div className="relative w-full h-full max-w-7xl flex items-center justify-center">
-                            <Image
-                                src={currentMedia.image?.url || currentMedia.previewImage?.url || ''}
-                                alt={currentMedia.alt || currentMedia.previewImage?.altText || 'Fullscreen product image'}
-                                fill
-                                className="object-contain"
-                                quality={100}
-                            />
+                            {currentMedia.image?.url || currentMedia.previewImage?.url ? (
+                                <Image
+                                    src={currentMedia.image?.url || currentMedia.previewImage?.url || ''}
+                                    alt={currentMedia.alt || currentMedia.previewImage?.altText || 'Fullscreen product image'}
+                                    fill
+                                    className="object-contain"
+                                    quality={100}
+                                />
+                            ) : (
+                                <div className="text-zinc-400">Ei kuvaa</div>
+                            )}
 
                             <button
                                 onClick={(e) => { e.stopPropagation(); prevImage(); }}

@@ -95,9 +95,9 @@ export async function getProducts(): Promise<ShopifyProduct[]> {
             media(first: 10) {
               edges {
                 node {
+                  id
+                  mediaContentType
                   ... on MediaImage {
-                    id
-                    mediaContentType
                     image {
                       url
                       width
@@ -109,8 +109,6 @@ export async function getProducts(): Promise<ShopifyProduct[]> {
                     }
                   }
                   ... on Model3d {
-                    id
-                    mediaContentType
                     sources {
                       url
                       mimeType
@@ -235,9 +233,9 @@ export async function getProductByHandle(handle: string): Promise<ShopifyProduct
         media(first: 10) {
           edges {
             node {
+              id
+              mediaContentType
               ... on MediaImage {
-                id
-                mediaContentType
                 image {
                   url
                   width
@@ -249,8 +247,6 @@ export async function getProductByHandle(handle: string): Promise<ShopifyProduct
                 }
               }
               ... on Model3d {
-                id
-                mediaContentType
                 sources {
                   url
                   mimeType
@@ -328,9 +324,9 @@ export async function getCollectionProducts({ collection, first = 4 }: { collect
               media(first: 5) {
                 edges {
                   node {
+                    id
+                    mediaContentType
                     ... on MediaImage {
-                      id
-                      mediaContentType
                       image {
                         url
                         width
@@ -342,8 +338,6 @@ export async function getCollectionProducts({ collection, first = 4 }: { collect
                       }
                     }
                     ... on Model3d {
-                      id
-                      mediaContentType
                       sources {
                         url
                         mimeType
