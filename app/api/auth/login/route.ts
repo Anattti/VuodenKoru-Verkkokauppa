@@ -2,6 +2,9 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { getLoginUrl } from '@/lib/shopify/auth';
 
+export const dynamic = 'force-dynamic';
+
+
 export async function GET() {
     try {
         const { url, state, nonce, codeVerifier } = await getLoginUrl();

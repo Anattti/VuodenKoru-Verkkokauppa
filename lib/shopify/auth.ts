@@ -2,6 +2,8 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import * as crypto from 'node:crypto';
 
+export const dynamic = 'force-dynamic';
+
 export const CUSTOMER_SESSION_COOKIE = 'shopify_customer_session';
 
 const CLIENT_ID = process.env.SHOPIFY_CUSTOMER_ACCOUNT_CLIENT_ID;

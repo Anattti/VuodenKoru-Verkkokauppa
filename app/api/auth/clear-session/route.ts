@@ -1,6 +1,9 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { clearSession } from '@/lib/shopify/auth';
 
+export const dynamic = 'force-dynamic';
+
+
 export async function GET(request: NextRequest) {
     // Tyhjennetään vanhentunut sessio
     await clearSession();

@@ -1,4 +1,6 @@
+export const dynamic = 'force-dynamic';
 import { redirect } from "next/navigation";
+
 import { isAuthenticated } from "@/lib/shopify/auth";
 import { getCustomerProfile, getCustomerOrders } from "@/lib/shopify/customer";
 import ShopHeader from "@/components/shop/ShopHeader";

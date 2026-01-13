@@ -7,8 +7,11 @@ export const metadata = {
     description: "Kirjaudu sisään tarkastellaksesi tilaushistoriaasi.",
 };
 
-export default async function LoginPage({ searchParams }: { searchParams: { error?: string } }) {
+export const dynamic = 'force-dynamic';
+
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
     const { error } = await searchParams;
+
 
     if (await isAuthenticated() && !error) {
         redirect("/account");

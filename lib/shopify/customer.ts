@@ -61,7 +61,7 @@ async function customerAccountFetch<T>({
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${session.accessToken}`,
+      'Authorization': session.accessToken,
     },
     body: JSON.stringify({ query, variables }),
   });
