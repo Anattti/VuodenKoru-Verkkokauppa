@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { isAuthenticated } from "@/lib/shopify/auth";
+import { isAuthenticated, clearSession } from "@/lib/shopify/auth";
 import { getCustomerProfile, getCustomerOrders } from "@/lib/shopify/customer";
 import ShopHeader from "@/components/shop/ShopHeader";
 import OrderList from "@/components/account/OrderList";
@@ -20,6 +20,9 @@ export default async function AccountPage() {
     const customer = await getCustomerProfile();
 
     if (!customer) {
+        // Tyhjennetään vanhentunut sessio ennen uudelleenohjausta
+        // Tämä estää ikuisen loopin /account <-> /login välillä
+        await clearSession();
         redirect("/account/login?error=stale_session");
     }
 

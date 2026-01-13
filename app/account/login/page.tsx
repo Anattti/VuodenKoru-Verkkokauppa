@@ -23,6 +23,11 @@ export default async function LoginPage({ searchParams }: { searchParams: { erro
                         Kirjautuminen epäonnistui. Yritä uudelleen.
                     </div>
                 )}
+                {error === 'stale_session' && (
+                    <div className="mb-8 p-4 bg-amber-50 border border-amber-100 rounded-xl text-amber-700 text-sm">
+                        Istuntosi on vanhentunut. Ole hyvä ja kirjaudu sisään uudelleen.
+                    </div>
+                )}
 
                 <h1 className="text-3xl font-light tracking-tight text-zinc-900 mb-6">Asiakastili</h1>
                 <p className="text-zinc-500 mb-10 leading-relaxed">Sinut ohjataan Shopifyn suojattuun kirjautumispalveluun.</p>

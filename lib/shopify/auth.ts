@@ -157,7 +157,16 @@ export async function getSession(): Promise<Session | null> {
 }
 
 /**
- * Clears the session.
+ * Clears only the session cookie without redirecting.
+ * Used when the session is stale/invalid and needs to be cleared.
+ */
+export async function clearSession() {
+    const cookieStore = await cookies();
+    cookieStore.delete(CUSTOMER_SESSION_COOKIE);
+}
+
+/**
+ * Clears the session and redirects to Shopify logout.
  */
 export async function logout() {
     const cookieStore = await cookies();
