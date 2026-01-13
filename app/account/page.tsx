@@ -5,18 +5,12 @@ import ShopHeader from "@/components/shop/ShopHeader";
 import OrderList from "@/components/account/OrderList";
 import Link from "next/link";
 import { ChevronRight, Settings, User, LogOut } from "lucide-react";
-import { logout, clearSession } from "@/lib/shopify/auth";
+import { logout } from "@/lib/shopify/auth";
 
 export const metadata = {
     title: "Oma tili | Vuoden Koru",
     description: "Hallinnoi tiliäsi ja tarkastele tilauksiasi.",
 };
-
-async function handleStaleSession(): Promise<never> {
-    'use server';
-    await clearSession();
-    redirect("/account/login?error=stale_session");
-}
 
 export default async function AccountPage() {
     if (!(await isAuthenticated())) {
@@ -26,9 +20,8 @@ export default async function AccountPage() {
     const customer = await getCustomerProfile();
 
     if (!customer) {
-        // Käytetään Server Actionia evästeiden tyhjentämiseen
-        await handleStaleSession();
-        return; // TypeScript tarvitsee tämän ymmärtääkseen control flow:n
+        // Session on vanhentunut - ohjataan API routeen joka tyhjentää evästeen
+        redirect("/api/auth/clear-session");
     }
 
     const orders = await getCustomerOrders();
