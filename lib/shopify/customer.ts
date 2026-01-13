@@ -7,7 +7,9 @@ export interface CustomerProfile {
   id: string;
   firstName?: string;
   lastName?: string;
-  phoneNumber?: string;
+  phoneNumber?: {
+    phoneNumber: string;
+  };
   emailAddress?: {
     emailAddress: string;
   };
@@ -146,7 +148,9 @@ export async function getCustomerProfile(): Promise<CustomerProfile | null> {
         id
         firstName
         lastName
-        phoneNumber
+        phoneNumber {
+          phoneNumber
+        }
         emailAddress {
           emailAddress
         }
