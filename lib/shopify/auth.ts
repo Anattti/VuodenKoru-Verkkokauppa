@@ -126,8 +126,12 @@ export async function handleCallback(code: string, state: string) {
 
     const expiresAt = new Date(Date.now() + data.expires_in * 1000).toISOString();
 
+    const accessToken = data.access_token.startsWith('shcat_')
+        ? data.access_token
+        : `shcat_${data.access_token}`;
+
     await setSession({
-        accessToken: data.access_token,
+        accessToken,
         expiresAt,
         idToken: data.id_token,
         refreshToken: data.refresh_token,
