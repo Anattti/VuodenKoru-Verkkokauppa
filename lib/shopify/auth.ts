@@ -18,6 +18,19 @@ export interface Session {
 }
 
 /**
+ * Decodes a JWT token without validation (for extracting claims like nonce).
+ */
+function decodeJwt(token: string) {
+    try {
+        const parts = token.split('.');
+        if (parts.length !== 3) return null;
+        return JSON.parse(Buffer.from(parts[1], 'base64url').toString());
+    } catch {
+        return null;
+    }
+}
+
+/**
  * PKCE Helpers: Creates a code verifier and challenge.
  */
 function generateCodeVerifier() {
@@ -66,6 +79,7 @@ export async function getLoginUrl() {
 export async function handleCallback(code: string, state: string) {
     const cookieStore = await cookies();
     const savedState = cookieStore.get('shopify_auth_state')?.value;
+    const savedNonce = cookieStore.get('shopify_auth_nonce')?.value;
     const codeVerifier = cookieStore.get('shopify_auth_code_verifier')?.value;
 
     if (!savedState || savedState !== state) {
@@ -103,6 +117,12 @@ export async function handleCallback(code: string, state: string) {
     }
 
     const data = await response.json();
+
+    // Best Practice: Validate nonce from id_token
+    const decodedIdToken = decodeJwt(data.id_token);
+    if (savedNonce && decodedIdToken?.nonce !== savedNonce) {
+        throw new Error('Invalid nonce in ID token');
+    }
 
     const expiresAt = new Date(Date.now() + data.expires_in * 1000).toISOString();
 
@@ -145,15 +165,62 @@ export async function getSession(): Promise<Session | null> {
     try {
         const session = JSON.parse(sessionData) as Session;
 
-        // Check if token is expired
+        // Check if token is expired or expiring soon (within 5 minutes)
         const expiresAt = new Date(session.expiresAt);
-        if (expiresAt <= new Date()) {
-            // Token expired, could implement refresh logic here if refreshToken exists
+        const now = new Date();
+
+        if (expiresAt <= new Date(now.getTime() + 5 * 60 * 1000)) {
+            // Token expired or about to expire, try to refresh
+            if (session.refreshToken) {
+                const newSession = await refreshAccessToken(session.refreshToken);
+                if (newSession) return newSession;
+            }
             return null;
         }
 
         return session;
     } catch {
+        return null;
+    }
+}
+
+/**
+ * Refreshes the access token using a refresh token.
+ */
+async function refreshAccessToken(refreshToken: string): Promise<Session | null> {
+    if (!CLIENT_ID || !SHOP_ID) return null;
+
+    try {
+        const body = new URLSearchParams({
+            grant_type: 'refresh_token',
+            client_id: CLIENT_ID,
+            refresh_token: refreshToken,
+        });
+
+        const response = await fetch(`https://shopify.com/authentication/${SHOP_ID}/oauth/token`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: body.toString(),
+        });
+
+        if (!response.ok) return null;
+
+        const data = await response.json();
+        const expiresAt = new Date(Date.now() + data.expires_in * 1000).toISOString();
+
+        const newSession: Session = {
+            accessToken: data.access_token,
+            expiresAt,
+            idToken: data.id_token,
+            refreshToken: data.refresh_token || refreshToken, // Use new or fall back to old
+        };
+
+        await setSession(newSession);
+        return newSession;
+    } catch (error) {
+        console.error('Failed to refresh token:', error);
         return null;
     }
 }
