@@ -55,21 +55,27 @@ async function customerAccountFetch<T>({
     throw new Error('Missing SHOPIFY_CUSTOMER_ACCOUNT_SHOP_ID');
   }
 
-  const endpoint = `https://shopify.com/authentication/${SHOP_ID}/account/api/${API_VERSION}/graphql.json`;
+  const endpoint = `https://shopify.com/${SHOP_ID}/account/api/${API_VERSION}/graphql.json`;
 
   const response = await fetch(endpoint, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': session.accessToken,
+      'Authorization': `Bearer ${session.accessToken}`,
     },
     body: JSON.stringify({ query, variables }),
   });
 
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error(`Customer Account API fetch failed (${response.status}):`, errorText);
+    throw new Error(`Customer Account API error: ${response.status}`);
+  }
+
   const json = await response.json();
 
   if (json.errors) {
-    console.error('Customer Account API Error:', json.errors);
+    console.error('Customer Account API GraphQL Error:', json.errors);
     throw new Error(json.errors[0]?.message || 'Unknown Customer Account API error');
   }
 
