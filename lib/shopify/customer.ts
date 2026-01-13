@@ -58,6 +58,7 @@ export interface CustomerOrder {
   lineItems: {
     edges: Array<{
       node: {
+        name: string;
         title: string;
         quantity: number;
         image?: {
@@ -72,8 +73,8 @@ export interface CustomerOrder {
       node: {
         status: string;
         trackingInformation: Array<{
-          number: string;
-          company: string;
+          number?: string;
+          company?: string;
           url?: string;
         }>;
       };
@@ -201,6 +202,7 @@ export async function getOrderDetail(orderId: string): Promise<CustomerOrder | n
         lineItems(first: 50) {
           edges {
             node {
+              name
               title
               quantity
               image {
@@ -440,6 +442,7 @@ export async function getCustomerOrders(): Promise<CustomerOrder[]> {
               lineItems(first: 50) {
                 edges {
                   node {
+                    name
                     title
                     quantity
                     image {
