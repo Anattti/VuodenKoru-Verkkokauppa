@@ -7,9 +7,39 @@ export interface CustomerProfile {
   id: string;
   firstName?: string;
   lastName?: string;
+  phoneNumber?: string;
   emailAddress?: {
     emailAddress: string;
   };
+  defaultAddress?: CustomerAddress;
+}
+
+export interface CustomerAddress {
+  id: string;
+  address1: string;
+  address2?: string;
+  city: string;
+  company?: string;
+  firstName: string;
+  lastName: string;
+  name?: string;
+  phoneNumber?: string;
+  territoryCode: string;
+  zip: string;
+  zoneCode?: string;
+}
+
+export interface CustomerAddressInput {
+  address1: string;
+  address2?: string;
+  city: string;
+  company?: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber?: string;
+  territoryCode: string;
+  zip: string;
+  zoneCode?: string;
 }
 
 export interface CustomerOrder {
@@ -17,6 +47,8 @@ export interface CustomerOrder {
   name: string;
   processedAt: string;
   statusPageUrl: string;
+  fulfillmentStatus: string;
+  financialStatus: string;
   totalPrice: {
     amount: string;
     currencyCode: string;
@@ -30,6 +62,18 @@ export interface CustomerOrder {
           url: string;
           altText?: string;
         };
+      };
+    }>;
+  };
+  fulfillments: {
+    edges: Array<{
+      node: {
+        status: string;
+        trackingInformation: Array<{
+          number: string;
+          company: string;
+          url?: string;
+        }>;
       };
     }>;
   };
@@ -102,8 +146,23 @@ export async function getCustomerProfile(): Promise<CustomerProfile | null> {
         id
         firstName
         lastName
+        phoneNumber
         emailAddress {
           emailAddress
+        }
+        defaultAddress {
+          id
+          address1
+          address2
+          city
+          company
+          firstName
+          lastName
+          name
+          phoneNumber
+          territoryCode
+          zip
+          zoneCode
         }
       }
     }
@@ -115,6 +174,242 @@ export async function getCustomerProfile(): Promise<CustomerProfile | null> {
   } catch (error) {
     console.error('Failed to fetch customer profile:', error);
     return null;
+  }
+}
+
+/**
+ * Gets a single order by ID.
+ */
+export async function getOrderDetail(orderId: string): Promise<CustomerOrder | null> {
+  const query = `
+    query getOrderDetail($id: ID!) {
+      order(id: $id) {
+        id
+        name
+        processedAt
+        statusPageUrl
+        fulfillmentStatus
+        financialStatus
+        totalPrice {
+          amount
+          currencyCode
+        }
+        lineItems(first: 50) {
+          edges {
+            node {
+              title
+              quantity
+              image {
+                url
+                altText
+              }
+            }
+          }
+        }
+        fulfillments(first: 5) {
+          edges {
+            node {
+              status
+              trackingInformation {
+                number
+                company
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await customerAccountFetch<{ order: CustomerOrder }>({
+      query,
+      variables: { id: orderId }
+    });
+    return data.order;
+  } catch (error) {
+    console.error('Failed to fetch order detail:', error);
+    return null;
+  }
+}
+
+/**
+ * Gets the customer's addresses.
+ */
+export async function getCustomerAddresses(): Promise<CustomerAddress[]> {
+  const query = `
+    query getCustomerAddresses {
+      customer {
+        addresses(first: 10) {
+          nodes {
+            id
+            address1
+            address2
+            city
+            company
+            firstName
+            lastName
+            name
+            phoneNumber
+            territoryCode
+            zip
+            zoneCode
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await customerAccountFetch<{ customer: { addresses: { nodes: CustomerAddress[] } } }>({ query });
+    return data.customer.addresses.nodes;
+  } catch (error) {
+    console.error('Failed to fetch customer addresses:', error);
+    return [];
+  }
+}
+
+/**
+ * Creates a new customer address.
+ */
+export async function createCustomerAddress(address: CustomerAddressInput, isDefault: boolean = false): Promise<{ address?: CustomerAddress; errors?: any[] }> {
+  const query = `
+    mutation customerAddressCreate($address: CustomerAddressInput!, $defaultAddress: Boolean) {
+      customerAddressCreate(address: $address, defaultAddress: $defaultAddress) {
+        customerAddress {
+          id
+          address1
+          address2
+          city
+          company
+          firstName
+          lastName
+          name
+          phoneNumber
+          territoryCode
+          zip
+          zoneCode
+        }
+        userErrors {
+          field
+          message
+          code
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await customerAccountFetch<{
+      customerAddressCreate: {
+        customerAddress: CustomerAddress;
+        userErrors: any[]
+      }
+    }>({
+      query,
+      variables: { address, defaultAddress: isDefault }
+    });
+
+    if (data.customerAddressCreate.userErrors.length > 0) {
+      return { errors: data.customerAddressCreate.userErrors };
+    }
+
+    return { address: data.customerAddressCreate.customerAddress };
+  } catch (error) {
+    console.error('Failed to create customer address:', error);
+    throw error;
+  }
+}
+
+/**
+ * Updates an existing customer address.
+ */
+export async function updateCustomerAddress(addressId: string, address: CustomerAddressInput, isDefault: boolean = false): Promise<{ address?: CustomerAddress; errors?: any[] }> {
+  const query = `
+    mutation customerAddressUpdate($address: CustomerAddressInput!, $addressId: ID!, $defaultAddress: Boolean) {
+      customerAddressUpdate(address: $address, addressId: $addressId, defaultAddress: $defaultAddress) {
+        customerAddress {
+          id
+          address1
+          address2
+          city
+          company
+          firstName
+          lastName
+          name
+          phoneNumber
+          territoryCode
+          zip
+          zoneCode
+        }
+        userErrors {
+          field
+          message
+          code
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await customerAccountFetch<{
+      customerAddressUpdate: {
+        customerAddress: CustomerAddress;
+        userErrors: any[]
+      }
+    }>({
+      query,
+      variables: { address, addressId, defaultAddress: isDefault }
+    });
+
+    if (data.customerAddressUpdate.userErrors.length > 0) {
+      return { errors: data.customerAddressUpdate.userErrors };
+    }
+
+    return { address: data.customerAddressUpdate.customerAddress };
+  } catch (error) {
+    console.error('Failed to update customer address:', error);
+    throw error;
+  }
+}
+
+/**
+ * Deletes a customer address.
+ */
+export async function deleteCustomerAddress(addressId: string): Promise<{ deletedId?: string; errors?: any[] }> {
+  const query = `
+    mutation customerAddressDelete($addressId: ID!) {
+      customerAddressDelete(addressId: $addressId) {
+        deletedAddressId
+        userErrors {
+          field
+          message
+          code
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await customerAccountFetch<{
+      customerAddressDelete: {
+        deletedAddressId: string;
+        userErrors: any[]
+      }
+    }>({
+      query,
+      variables: { addressId }
+    });
+
+    if (data.customerAddressDelete.userErrors.length > 0) {
+      return { errors: data.customerAddressDelete.userErrors };
+    }
+
+    return { deletedId: data.customerAddressDelete.deletedAddressId };
+  } catch (error) {
+    console.error('Failed to delete customer address:', error);
+    throw error;
   }
 }
 
@@ -132,6 +427,8 @@ export async function getCustomerOrders(): Promise<CustomerOrder[]> {
               name
               processedAt
               statusPageUrl
+              fulfillmentStatus
+              financialStatus
               totalPrice {
                 amount
                 currencyCode
@@ -144,6 +441,18 @@ export async function getCustomerOrders(): Promise<CustomerOrder[]> {
                     image {
                       url
                       altText
+                    }
+                  }
+                }
+              }
+              fulfillments(first: 5) {
+                edges {
+                  node {
+                    status
+                    trackingInformation {
+                      number
+                      company
+                      url
                     }
                   }
                 }
