@@ -1,13 +1,11 @@
-import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
+import { NextResponse, NextRequest } from 'next/server';
+import { clearSession } from '@/lib/shopify/auth';
 
-const CUSTOMER_SESSION_COOKIE = 'shopify_customer_session';
-
-export async function GET() {
+export async function GET(request: NextRequest) {
     // Tyhjennetään vanhentunut sessio
-    const cookieStore = await cookies();
-    cookieStore.delete(CUSTOMER_SESSION_COOKIE);
+    await clearSession();
 
-    // Ohjataan takaisin login-sivulle virheviestillä
-    return NextResponse.redirect(new URL('/account/login?error=stale_session', process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'));
+    // Ohjataan takaisin login-sivulle virheviestillä käyttäen nykyistä originia
+    const origin = request.nextUrl.origin;
+    return NextResponse.redirect(`${origin}/account/login?error=stale_session`);
 }

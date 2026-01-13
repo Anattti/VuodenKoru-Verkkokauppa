@@ -10,7 +10,7 @@ export const metadata = {
 export default async function LoginPage({ searchParams }: { searchParams: { error?: string } }) {
     const { error } = await searchParams;
 
-    if (await isAuthenticated()) {
+    if (await isAuthenticated() && !error) {
         redirect("/account");
     }
 

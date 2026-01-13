@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import * as crypto from 'node:crypto';
 
-const CUSTOMER_SESSION_COOKIE = 'shopify_customer_session';
+export const CUSTOMER_SESSION_COOKIE = 'shopify_customer_session';
 
 const CLIENT_ID = process.env.SHOPIFY_CUSTOMER_ACCOUNT_CLIENT_ID;
 const SHOP_ID = process.env.SHOPIFY_CUSTOMER_ACCOUNT_SHOP_ID;
@@ -162,7 +162,12 @@ export async function getSession(): Promise<Session | null> {
  */
 export async function clearSession() {
     const cookieStore = await cookies();
-    cookieStore.delete(CUSTOMER_SESSION_COOKIE);
+    cookieStore.set(CUSTOMER_SESSION_COOKIE, '', {
+        maxAge: 0,
+        path: '/',
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production'
+    });
 }
 
 /**
