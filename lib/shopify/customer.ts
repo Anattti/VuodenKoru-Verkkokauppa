@@ -55,31 +55,41 @@ async function customerAccountFetch<T>({
     throw new Error('Missing SHOPIFY_CUSTOMER_ACCOUNT_SHOP_ID');
   }
 
-  const endpoint = `https://shopify.com/${SHOP_ID}/account/api/${API_VERSION}/graphql.json`;
+  const endpoint = `https://shopify.com/${SHOP_ID}/account/customer/api/${API_VERSION}/graphql.json`;
 
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${session.accessToken}`,
-    },
-    body: JSON.stringify({ query, variables }),
-  });
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${session.accessToken}`,
+      },
+      body: JSON.stringify({ query, variables }),
+    });
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error(`Customer Account API fetch failed (${response.status}):`, errorText);
-    throw new Error(`Customer Account API error: ${response.status}`);
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Customer Account API Request Failed:
+        Status: ${response.status}
+        StatusText: ${response.statusText}
+        URL: ${endpoint}
+        Body snippet: ${errorText.substring(0, 200)}
+      `);
+      throw new Error(`Customer Account API HTTP error: ${response.status}`);
+    }
+
+    const json = await response.json();
+
+    if (json.errors) {
+      console.error('Customer Account API GraphQL Error:', JSON.stringify(json.errors, null, 2));
+      throw new Error(json.errors[0]?.message || 'Unknown Customer Account API error');
+    }
+
+    return json.data;
+  } catch (error) {
+    console.error('Customer Account API network/parse error:', error);
+    throw error;
   }
-
-  const json = await response.json();
-
-  if (json.errors) {
-    console.error('Customer Account API GraphQL Error:', json.errors);
-    throw new Error(json.errors[0]?.message || 'Unknown Customer Account API error');
-  }
-
-  return json.data;
 }
 
 /**
