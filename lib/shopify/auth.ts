@@ -247,13 +247,17 @@ export async function clearSession() {
  * Clears the session and redirects to Shopify logout.
  */
 export async function logout() {
+    const session = await getSession();
     const cookieStore = await cookies();
+
+    // Tyhjennetään eväste heti
     cookieStore.delete(CUSTOMER_SESSION_COOKIE);
 
-    if (SHOP_ID && CLIENT_ID) {
-        const logoutUrl = `https://shopify.com/authentication/${SHOP_ID}/logout?client_id=${CLIENT_ID}&post_logout_redirect_uri=${encodeURIComponent(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000')}`;
+    if (SHOP_ID && CLIENT_ID && session?.idToken) {
+        const logoutUrl = `https://shopify.com/authentication/${SHOP_ID}/logout?id_token_hint=${session.idToken}&post_logout_redirect_uri=${encodeURIComponent(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000')}`;
         redirect(logoutUrl);
     } else {
+        // Jos idTokenia ei jostain syystä ole, ohjataan ainakin etusivulle
         redirect('/');
     }
 }
