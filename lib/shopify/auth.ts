@@ -254,11 +254,12 @@ export async function logout() {
     cookieStore.delete(CUSTOMER_SESSION_COOKIE);
 
     if (SHOP_ID && CLIENT_ID && session?.idToken) {
-        const logoutUrl = `https://shopify.com/authentication/${SHOP_ID}/logout?id_token_hint=${session.idToken}&post_logout_redirect_uri=${encodeURIComponent(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000')}`;
+        const returnUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/account/login?status=logged_out`;
+        const logoutUrl = `https://shopify.com/authentication/${SHOP_ID}/logout?id_token_hint=${session.idToken}&post_logout_redirect_uri=${encodeURIComponent(returnUrl)}`;
         redirect(logoutUrl);
     } else {
-        // Jos idTokenia ei jostain syystä ole, ohjataan ainakin etusivulle
-        redirect('/');
+        // Jos idTokenia ei jostain syystä ole, ohjataan login-sivulle dynaamisesti
+        redirect('/account/login?status=logged_out');
     }
 }
 
